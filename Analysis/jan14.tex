@@ -1,0 +1,281 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Structured General Purpose Assignment
+% LaTeX Template
+%
+% This template has been downloaded from:
+% http://www.latextemplates.com
+%
+% Original author:
+% Ted Pavlic (http://www.tedpavlic.com)
+%
+% Note:
+% The \lipsum[#] commands throughout this template generate dummy text
+% to fill the template out. These commands should all be removed when 
+% writing assignment content.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage{graphicx} % Required to insert images
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{systeme}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{mathtools}
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in 
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime) \hmwkTitle} % Top center header
+\rhead{\firstxmark} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+   
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+%\newcommand{\hmwkTitle}{January 2016} % Assignment title
+%\newcommand{\hmwkDueDate}{Monday,\ January\ 1,\ 2012} % Due date
+\newcommand{\hmwkClass}{UMD Analysis Qualifying Exam Solutions} % Course/class
+\newcommand{\hmwkClassTime}{2014} % Class/lecture time
+\newcommand{\hmwkClassInstructor}{January} % Teacher/lecturer
+\newcommand{\hmwkAuthorName}{Phil Wertheimer} % Your name
+
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+
+\newpage
+%\tableofcontents
+%\newpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+% To have just one problem per page, simply put a \clearpage after each problem
+
+\begin{homeworkProblem}
+Let $m$ denote the Lebesgue measure on $\mathbb{R}$. Let $E$ be a Lebesgue measurable subset of $\mathbb{R}$ such that $m(E \cap (E + t)) = 0$ for all $t\neq 0$. Prove that $m(E) = 0$.
+
+\problemAnswer{
+Let $E_{k} = E \cap [k, k+1)$. Since $E$ is measurable, so is each translate $E + \displaystyle\frac{1}{n}$, $n \in \mathbb{N}$, and also the countable union $\displaystyle\bigcup_{n=1}^{\infty}\left(E_{k} + \displaystyle\frac{1}{n}\right)$. By definition of measurable sets, we have
+$$m(E_{k}) = m\left(E_{k} \cap \displaystyle\bigcup_{n=1}^{\infty}\left(E_{k} + \frac{1}{n}\right)\right) + m\left(E_{k} \cap \left(\displaystyle\bigcup_{n=1}^{\infty}\left(E_{k} + \frac{1}{n}\right)\right)^{c}\right)$$
+By subadditivity of $m$, 
+\begin{align*}
+    m\left(E_{k} \cap \displaystyle\bigcup_{n=1}^{\infty}\left(E_{k} + \frac{1}{n}\right)\right) &= m\left(\displaystyle\bigcup_{n=1}^{\infty}E_{k} \cap \left(E_{k} + \frac{1}{n}\right)\right) \\
+    &\leq \displaystyle\sum_{n=1}^{\infty}m\left(E_{k} \cap \left(E_{k} + \displaystyle\frac{1}{n}\right)\right) \\
+    &= 0
+\end{align*}
+We also have
+\begin{align*}
+    m\left(E_{k} \cap \left(\displaystyle\bigcup_{n=1}^{\infty}\left(E_{k} + \frac{1}{n}\right)\right)^{c}\right) &\leq m\left(\displaystyle\bigcup_{n=1}^{\infty}E_{k}\setminus \left(E_{k} + \frac{1}{n}\right)\right) \\ 
+    &\leq \displaystyle\sum_{n=1}^{\infty}m\left(E_{k}\setminus \left(E_{k} + \frac{1}{n}\right)\right) \\
+    &= \displaystyle\sum_{n=1}^{\infty}m(E_{k}) - m\left(E_{k} + \frac{1}{n}\right) \\
+    &= 0
+\end{align*}
+The first inequality follows from monotonicity and the fact that $A\setminus\displaystyle\bigcup_{i\in I} B_{i} \subseteq \displaystyle\bigcup_{i\in I} A\setminus B_{i}$. The second inequality comes from subadditivity of $m$. The first equality follows from excision since $m(E_{k}) < \infty$, and the last equality follows from translation invariance of $m$.
+
+Putting this all together gives $m(E_{k}) = 0$ for all $k$. Therefore $m(E) = \sum_{k\in\mathbb{Z}}m(E_{k}) = 0.$ \newline
+
+Alternative solution: \newline
+
+Define $E_{n}$ = $E \cap [-n, n]$. Note that for all $n$, $E_{n} + \frac{1}{n} \subset [-(n+1), n+1]$. If $m(E_{N}) > 0$ for some $N$ then we have 
+$$\infty > m([-(N+1), N+1]) \geq m\left(\bigcup_{n=1}^{\infty}(E_{N}+\frac{1}{n})\right) = \displaystyle\sum_{n=1}^{\infty}m(E_{n}) = \infty$$
+The inequality follows from the fact that the sets $E_{N} + \frac{1}{n}$ are essentially disjoint and each contained in $[-(N+1), N+1]$ and the equality follows from translation invariance.
+}
+
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem} % Custom section title
+Let $f$ be an analytic function on the open unit disk $D$ satisfying $f(0) = 0$ and $-1 < $Re$f(z)< 1$ for all $z \in D$. Show that
+$$|\Im f(z)| \leq \displaystyle\frac{2}{\pi}\log\left({\displaystyle\frac{1 + |z|}{1 - |z|}}\right)$$
+
+\problemAnswer{
+The map $z \mapsto \displaystyle\frac{\pi i}{2}$ maps the vertical strip $-1 < $Re$f(z)< 1$ to the horizontal strip $-\displaystyle\frac{\pi}{2} < $ Im$z < \displaystyle\frac{\pi}{2}$. The exponential map $e^{z}$ then maps this strip to the right half plane, which is mapped conformally to $D$ via $\displaystyle\frac{z-1}{z+1}$. Putting this all together, we have that
+$$F(z) = \displaystyle\frac{e^{\frac{\pi i}{2}f(z)} - 1}{e^{\frac{\pi i}{2}f(z)} + 1}$$
+is an analytic map $D \rightarrow D$ with $F(0) = 0$ (since $f(0) = 0$). Therefore, the Schwarz Lemma gives $|F(z)| \leq |z|$ for all $z\in D$.
+
+After some algebra,
+\begin{align*}
+    |z| \geq |F(z)| = \left|\displaystyle\frac{e^{\frac{\pi i}{2}f(z)} - 1}{e^{\frac{\pi i}{2}f(z)} + 1}\right| &\geq \displaystyle\frac{|e^{\frac{\pi i}{2}f(z)}| - 1}{|e^{\frac{\pi i}{2}f(z)}| + 1} \\
+    &= \displaystyle\frac{e^{\frac{-\pi}{2}\Im f(z)} - 1}{e^{\frac{-\pi}{2}\Im f(z)} + 1}
+\end{align*}
+Cross-multiplying,
+$$e^{\frac{-\pi}{2}\Im f(z)} - 1 \leq |z|(e^{\frac{-\pi}{2}\Im f(z)} + 1) = |z|e^{\frac{-\pi}{2}\Im f(z)} + |z|$$
+Combining like terms,
+$$e^{\frac{-\pi}{2}\Im f(z)}(1-|z|) \leq 1 + |z|$$
+Dividing and taking log of both sides,
+$$\displaystyle-\frac{\pi}{2}\Im f(z) \leq \log\left(\displaystyle\frac{1+|z|}{1-|z|}\right)$$
+Therefore
+$$\Im f(z) \leq \displaystyle-\frac{2}{\pi}\log\left(\displaystyle\frac{1+|z|}{1-|z|}\right)$$
+}
+
+\end{homeworkProblem}
+
+\clearpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 3
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+Let $f: [a,b] \rightarrow \mathbb{R}$ be Lebesgue integrable. Suppose that for every open interval $(c,d) \subset (a,b)$, with $c$ and $d$ rational, $\displaystyle\int_{(c,d)}f$ $= 0$. Show that $f = 0$ almost everywhere on $[a,b]$. 
+
+\problemAnswer{ 
+Let $\epsilon > 0$. By integrability of $f$, there exists $\delta$ such that $\displaystyle\int_{A}f$ $< \displaystyle\frac{\epsilon}{2}$ when $m(A) < \delta$. By density of $\mathbb{Q}$ in $\mathbb{R}$, choose rational numbers $q_{1}, q_{2}$ such that $a < q_{1} < q_{2} < b$ and $q_{1} - a < \delta$, $b - q_{2} < \delta$. Then
+$$\int_{a}^{b}f = \int_{a}^{q_{1}} f + \int_{q_{1}}^{q_{2}}f + \int_{q_{2}}^{b}f < \epsilon$$
+Since $\epsilon$ was arbitrary, this shows $\int_{a}^{b}f = 0$, which implies $f = 0$ a.e. on $[a,b]$.}
+
+\end{homeworkProblem}
+
+\clearpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 4
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+Calculate the value of the improper integral $\displaystyle\int_{0}^{\infty}\displaystyle\frac{\cos(ax)}{(1+x^{2})^{2}}\ dx$, where $a\geq 0$. \newline
+
+\problemAnswer{ 
+Since the integrand is even, we have $\displaystyle\int_{0}^{\infty}\displaystyle\frac{\cos(ax)}{(1+x^{2})^{2}}\ dx$ = $\displaystyle\frac{1}{2}\displaystyle\int_{-\infty}^{\infty}\displaystyle\frac{\cos(ax)}{(1+x^{2})^{2}}\ dx$. Define $f(z) = \displaystyle\frac{e^{iaz}}{(1+z^{2})^{2}}$, and consider the integral of $f$ over the semicircular contour $\gamma_{R}$ composed of the interval $[-R, R]$ joined with the semicircular arc $C_{R}$, oriented counterclockwise. For $R$ large, $f$ is analytic in $\gamma_{R}$ except for a pole of order $2$ at $z = i$, so the residue theorem tells us that 
+$$\displaystyle\int_{\gamma_{R}}f(z)\ dz = 2\pi i \cdot \textrm{Res}(f; i)$$
+The residue is computed as
+$$2\pi i\lim_{z\to i}\displaystyle\frac{d}{dz}\left(\displaystyle\frac{e^{aiz}}{(z+i)^{2}}\right) = \displaystyle\frac{\pi(a+1)}{2e^{a}}$$
+Breaking $\gamma_{R}$ into its components, this gives
+$$\displaystyle\int_{-R}^{R}f(z)\ dz + \displaystyle\int_{C_{R}}f(z)\ dz = \displaystyle\frac{\pi(a+1)}{2e^{a}} \ \ \ \ \ (\star)$$
+For the second integral, on $C_{R}$ we write $z = Re^{i\theta}$ and compute
+$$\left|\displaystyle\int_{C_{R}}f(z)\ dz\right| \leq \displaystyle\int_{C_{R}}|f(z)|\ dz = \displaystyle\int_{C_{R}}\displaystyle\frac{|e^{iaz}|}{|(z+1)^{2}|}\ dz$$
+Substitute $z = Re^{i\theta}, \theta \in [0, \pi]$ (we'll deal with the numerator after):
+$$\displaystyle\int_{C_{R}}\displaystyle\frac{|e^{iaz}|}{|(z+1)^{2}|}\ dz = \displaystyle\int_{0}^{\pi}\displaystyle\frac{|e^{iaz}|}{|(Re^{i\theta} + 1)^{2}|}\ \cdot |Rie^{i\theta}| \ d\theta \leq \displaystyle\int_{0}^{\pi}\displaystyle\frac{|e^{iaz}|}{R^{2}} \cdot R \ d\theta = \displaystyle\int_{0}^{\pi}\displaystyle\frac{|e^{iaz}|}{R} \ d\theta $$
+For the numerator, $iaz = ia(Re^{i\theta}) = ia(R\cos\theta + iR\sin\theta)$. So
+$$|e^{iaz}| = e^{\Re iaz} = e^{-aR\sin\theta}$$
+Since $a \geq 0, R > 0$ and $\sin\theta \geq 0$ (as $\theta \in [0, \pi]$), this is less than $1$.
+So the integral is bounded by $\displaystyle\frac{\pi}{R}$. Now, let $R \to \infty$ in $(\star)$. The right hand side is independent of $R$, so does not change. On the left hand side, the integral over $C_{R}$ vanishes as $\displaystyle\frac{\pi}{R} \to 0$. So we are left with
+$$\displaystyle\int_{-\infty}^{\infty}f(z)\ dz = \displaystyle\frac{\pi(a+1)}{2e^{a}}$$
+To finish, 
+$$\displaystyle\int_{0}^{\infty}\displaystyle\frac{\cos(ax)}{(1+x^{2})^{2}}\ dx = \displaystyle\frac{1}{2}\displaystyle\int_{-\infty}^{\infty}\displaystyle\frac{\cos(ax)}{(1+x^{2})^{2}}\ dx = \displaystyle\frac{1}{2}\Re \displaystyle\int_{-\infty}^{\infty}f(z)\ dz = \displaystyle\frac{1}{2}\Re \displaystyle\frac{\pi(a+1)}{2e^{a}} = \displaystyle\frac{\pi(a+1)}{4e^{a}}$$}
+\end{homeworkProblem}
+
+\clearpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 5
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+Let $f$ be a continuous real-valued function on the interval $[0,1]$. Compute
+$$\lim_{n\to\infty}\displaystyle\int_{0}^{1}(n+1)x^{n}f(x)\ dx$$
+
+\problemAnswer{
+First note that since $f$ is continuous on $[0,1]$ it is integrable over $[0,1]$. Break the interval into
+$$\displaystyle\int_{0}^{1}(n+1)x^{n}f(x)\ dx = \displaystyle\int_{0}^{1}nx^{n}f(x)\ dx + \displaystyle\int_{0}^{1}x^{n}f(x)\ dx$$
+For the first, make the substitution $u = x^{n}, du = nx^{n-1}$ to get
+$$\lim_{n\to\infty}\displaystyle\int_{0}^{1}nx^{n}f(x)\ dx = \lim_{n\to\infty}\displaystyle\int_{0}^{1}u^{1/n}f(u^{1/n})\ du$$
+The integrand is bounded by the integrable function $f$, so we may apply Lebesgue Dominated Convergence to obtain
+$$\lim_{n\to\infty}\displaystyle\int_{0}^{1}u^{1/n}f(u^{1/n})\ du = \displaystyle\int_{0}^{1}\lim_{n\to\infty}u^{1/n}f(u^{1/n})\ du = \displaystyle\int_{0}^{1}f(1) = f(1)$$
+For the second integral, the integrand is again bounded by $f$, so Lebesgue Dominated Convergence gives
+$$\lim_{n\to\infty}\displaystyle\int_{0}^{1}x^{n}f(x)\ dx = \displaystyle\int_{0}^{1}\lim_{n\to\infty}x^{n}f(x)\ dx = \displaystyle\int_{0}^{1}0 = 0$$
+Therefore the overall limit is $f(1)$.
+}
+
+%--------------------------------------------
+
+\end{homeworkProblem}
+
+\clearpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 6
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+Let $f$ be an analytic function on the open unit disk $D$. Recall that $f$ is said to be univalent if it is one-to-one. Suppose that $f$ is \textit{not} univalent on $D$. Show that $f$ cannot be univalent on any annulus of the form $c < |z| < 1$, where $0 < c < 1$.
+\\
+
+\problemAnswer{ % Answer
+We prove by contrapositive. Suppose that $f$ is univalent on $c < |z| < 1$ for some $0 < c< 1$. Let $w \in D$ be arbitrary. Define $g(z) = f(z) - f(w)$. Let $r < 1$. If $g \neq 0$ on $C_{r}$ then the winding number $W(g, C_{r})$ is the number of zeroes of $g$ in $D_{r}$
+}
+
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}

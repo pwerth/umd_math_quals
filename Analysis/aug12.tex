@@ -1,0 +1,243 @@
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage{graphicx} % Required to insert images
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{systeme}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{mathtools}
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in 
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+\chead{\hmwkClass\: } % Top center header
+\rhead{\hmwkTitle} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+   
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Analysis - August, 2012} % Assignment title
+\newcommand{\hmwkDueDate}{Monday,\ January\ 1,\ 2012} % Due date
+\newcommand{\hmwkClass}{UMD Math Qualifying Exam Solutions} % Course/class
+\newcommand{\hmwkAuthorName}{Phil Wertheimer} % Your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+Compute the following limit. Justify your answer.
+$$\lim_{n\to\infty}\displaystyle\int_{0}^{\infty}\left(1+\displaystyle\frac{x}{n}\right)^{-n}\sin\left(\displaystyle\frac{x}{n}\right)\ dx$$
+
+\problemAnswer{
+Since $x\geq 0$, for $n\geq 2$ we have
+\begin{align*}
+    \left(1+\displaystyle\frac{x}{n}\right)^{n} &= 1 + \displaystyle\frac{2x}{n} + \displaystyle\frac{x^{2}}{n^{2}} + \hdots \\
+    &\geq 1 + x + \displaystyle\frac{x^{2}}{4} \\
+    &= \left(1+ \displaystyle\frac{x}{2}\right)^{2}
+\end{align*}
+Thus 
+$$\left|\displaystyle\frac{\sin\left(\displaystyle\frac{x}{n}\right)}{\left(1+\displaystyle\frac{x}{n}\right)^{n}}\right| \leq \displaystyle\frac{1}{\left(1+\displaystyle\frac{x}{2}\right)^{2}}$$
+Since $f(x) = \displaystyle\frac{1}{\left(1+\displaystyle\frac{x}{2}\right)^{2}}$ is in $L^{1}[0,\infty]$ (its integral can easily be seen to be $2$), we can apply Lebesgue Dominated Convergence to pass the limit into the integral:
+$$\lim_{n\to\infty}\displaystyle\int_{0}^{\infty}\left(1+\displaystyle\frac{x}{n}\right)^{-n}\sin\left(\displaystyle\frac{x}{n}\right)\ dx = \displaystyle\int_{0}^{\infty}\lim_{n\to\infty}\left(1+\displaystyle\frac{x}{n}\right)^{-n}\sin\left(\displaystyle\frac{x}{n}\right)\ dx = \displaystyle\int_{0}^{\infty}0\ dx = 0$$
+We could have alternatively used the Monotone Convergence Theorem and the fact that the denominator of the integrand converges monotonically to $e^{x}$, which can be seen easily from L'Hospital's Rule.
+}
+
+%--------------------------------------------
+
+\end{homeworkProblem}
+
+\clearpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+For $a$ real with $a^{2} < 1$, evaluate the integral
+$$\displaystyle\int_{0}^{\pi}\displaystyle\frac{\cos(2\theta)}{1 - 2a\cos\theta + a^{2}}\ d\theta$$
+
+%--------------------------------------------
+
+\problemAnswer{
+
+}
+
+%--------------------------------------------
+
+\end{homeworkProblem}
+
+\clearpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 3
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+Assume that $f$ is absolutely continuous on an interval $[a,b]$ and there is a continuous function $g$ such that $f' = g$ a.e. Show that $f$ is differentiable at every $x \in [a,b]$ and that $f'(x) = g(x)$ $\forall x \in [a,b]$.\newline
+
+%--------------------------------------------
+
+\problemAnswer{
+Fix $x \in [a,b]$ and let $\epsilon > 0$. By continuity of $g$, choose $\delta$ such that $|t - x| < \delta \Rightarrow |g(t) - g(x)| < \epsilon$. Then
+\begin{align*}
+    |f'(x) - g(x)| &= \left|\lim_{h\to 0}\displaystyle\frac{f(x+h) - f(x)}{h} - g(x)\right| \\
+    &= \left|\lim_{h\to 0}\displaystyle\frac{\displaystyle\int_{x}^{x+h}f'(t)\ dt - hg(x)}{h}\right| \\
+    &= \lim_{h\to 0}\displaystyle\frac{\left|\displaystyle\int_{x}^{x+h}g(t)\ dt - \displaystyle\int_{x}^{x+h}g(x)\ dt\right|}{h} \\
+    &= \lim_{h\to 0}\displaystyle\frac{\left|\displaystyle\int_{x}^{x+h}(g(t) - g(x))\ dt\right|}{h}
+\end{align*}
+In the third step, we used the fact that $f' = g$ a.e. Now, when $h$ is sufficiently small; specifically, when $h < \delta$, then
+$$\displaystyle\frac{\left|\displaystyle\int_{x}^{x+h}(g(t) - g(x))\ dt\right|}{h} \leq \displaystyle\frac{\displaystyle\int_{x}^{x+h}|(g(t) - g(x))|\ dt}{h} < \displaystyle\frac{\displaystyle\int_{x}^{x+h}\epsilon \ dt}{h} = \displaystyle\frac{\epsilon\cdot h}{h} = \epsilon$$
+Since $\epsilon$ was arbitrary, we have $f'(x) = g(x)$. Since $x$ was arbitrary, we have $f' = g$ everywhere on $[a,b]$.
+}
+
+%--------------------------------------------
+
+\end{homeworkProblem}
+
+\clearpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 4
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+Suppose $h(z)$ is holomorphic on a region containing the disc $\{|z| \leq R\}$ and that $|h(z)| < R$ if $|z| = R$. How many solutions does the equation $h(z) = z$ have in the disc $\{|z| \leq R\}$? Justify your answer.\newline
+
+\problemAnswer{ 
+Let $g(z) = h(z) - z$. Then for $|z| = R|$, $|g(z) + z| = |h(z)| < R$, so by Rouche's theorem, $g(z)$ and $z$ have the same number of zeroes in $\{|z| \leq R\}$, which is one. Since $g(z) = h(z) - z$, this implies $h(z) = z$ has one solution in the disk.
+}
+
+\end{homeworkProblem}
+
+\clearpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 5
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+Let $f$ be a nonnegative Lebesgue integrable function on $[0,1]$. Denote by $m$ the Lebesgue measure on $[0,1]$.
+
+\begin{homeworkSection}{(i)}
+Prove that, for each $\epsilon > 0$, there is a $c > 0$ such that
+$$\displaystyle\int_{\{x\in [0,1] : f(x) \geq c\}}f\ dm < \epsilon$$
+\end{homeworkSection}
+
+\problemAnswer{ 
+By Chebyshev's inequality, 
+$$m(\{x \in [0,1]: f(x) \geq c\} \leq \displaystyle\frac{\displaystyle\int_{0}^{1}f\ dm}{c}$$
+Let $\epsilon > 0$. By the second part below, there exists $\delta$ such that if $E \subset [0,1]$ with $m(E) < \delta$, $\int_{E}f\ dm < \epsilon$. Choose $c$ with $\displaystyle\frac{\displaystyle\int_{0}^{1}f\ dm}{c} < \delta$. Then $m(\{x \in [0,1]: f(x) \geq c\} \leq \displaystyle\frac{\displaystyle\int_{0}^{1}f\ dm}{c} < \delta$ and so
+$$\displaystyle\int_{\{x\in [0,1] : f(x) \geq c\}}f\ dm < \epsilon$$
+}
+
+\begin{homeworkSection}{(ii)}
+Prove that, for each $\epsilon > 0$, there is a $\delta > 0$ such that for each measurable subset $E$ of $[0,1]$:
+$$\textrm{if } m(E) < \delta, \textrm{ then } \int_{E}f \ dm < \epsilon$$
+\end{homeworkSection}
+
+\problemAnswer{
+Let $\epsilon > 0$. By definition of Lebesgue integrable functions, there exists $g$ bounded, measurable with $g \leq f$, and
+$$\int_{0}^{1} f\ dm < \int_{0}^{1}g\ dm + \displaystyle\frac{\epsilon}{2}$$
+Then for $E \subset [0,1]$ measurable,
+$$\int_{E}(f-g)\ dm \leq \int_{0}^{1}(f-g)\ dm < \displaystyle\frac{\epsilon}{2}$$
+Let $M$ be an upper bound for $g$ i.e. $g \leq M$. Then if $m(E) < \displaystyle\frac{\epsilon}{2M}$,
+\begin{align*}
+    \int_{E}f\ dm &\leq \int_{E}g\ dm + \displaystyle\frac{\epsilon}{2} \\
+    &\leq \int_{E}M\ dm + \displaystyle\frac{\epsilon}{2} \\
+    &= M\cdot m(E) + \displaystyle\frac{\epsilon}{2} \\ 
+    &< \epsilon
+\end{align*}
+}
+
+\end{homeworkProblem}
+
+\clearpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 6
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+Show that the infinite product
+$$\displaystyle\prod_{n=1}^{\infty}\left(1 + \displaystyle\frac{z}{\sqrt{n}}\right)e^{-\frac{z}{\sqrt{n}}} + \frac{z^{2}}{2n}$$
+converges uniformly and absolutely on every compact subset of $\mathbb{C}$.
+
+\problemAnswer{ 
+
+}
+\end{homeworkProblem}
+
+\end{document}

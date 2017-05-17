@@ -1,0 +1,253 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Structured General Purpose Assignment
+% LaTeX Template
+%
+% This template has been downloaded from:
+% http://www.latextemplates.com
+%
+% Original author:
+% Ted Pavlic (http://www.tedpavlic.com)
+%
+% Note:
+% The \lipsum[#] commands throughout this template generate dummy text
+% to fill the template out. These commands should all be removed when 
+% writing assignment content.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage{graphicx} % Required to insert images
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{systeme}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in 
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime) \hmwkTitle} % Top center header
+\rhead{\firstxmark} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+   
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+%\newcommand{\hmwkTitle}{January 2016} % Assignment title
+%\newcommand{\hmwkDueDate}{Monday,\ January\ 1,\ 2012} % Due date
+\newcommand{\hmwkClass}{UMD Analysis Qualifying Exam Solutions} % Course/class
+\newcommand{\hmwkClassTime}{2013} % Class/lecture time
+\newcommand{\hmwkClassInstructor}{August} % Teacher/lecturer
+\newcommand{\hmwkAuthorName}{Phil Wertheimer} % Your name
+
+\begin{document}
+
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+
+\newpage
+%\tableofcontents
+%\newpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+% To have just one problem per page, simply put a \clearpage after each problem
+
+\begin{homeworkProblem}
+Let $f$ be a real-valued everywhere differentiable function on $[0,1]$. Prove that $f \in AC[0,1]$ if and only if $f \in BV[0,1]$.
+\\
+
+\problemAnswer{
+If $f$ is absolutely continuous then for any $\epsilon > 0$, there exists $\delta$ such that if $\{(a_{k}, b_{k})\}_{k=1}^{N}$ are disjoint in $[0,1]$ with $\sum (b_{k} - a_{k}) < \delta$ then $\sum |f(b_{k}) - f(a_{k})| < 1$. Partition $[0,1]$ into intervals of size less than or equal $\delta$. That is, write $0 = x_{0} < x_{1} < \hdots < x_{N} = 1$ where $x_{n} - x_{n-1} < \delta$ for all $n$ (we can do this since $[0,1]$ has finite measure). Now, since variation is additive, the total variation of $f$ on $[0,1]$ is equal to the sum of the variations on each interval $[x_{n}, x_{n+1}]$. But for any $n$,
+$$V_{x_{n}}^{x_{n+1}}f = \sup_{P}\sum_{k=1}^{M}|f(p_{k}) - f(p_{k-1})| < \sup_{P} 1 = 1$$
+Therefore for any partition $P$ of $[x_{n}, x_{n+1}]$, the variation is at most $1$, hence the total variation over any partition of $[0,1]$ is at most $N$. So $f \in BV[0,1]$. Note that this direction holds even without the assumption of everywhere differentiability.
+\\
+
+For the other direction, we appeal to the Banach-Zarecki Theorem and show that $f$ maps measure zero sets to measure zero sets. If $m(A) = 0$, by definition of measure there exist intervals $\{(a_{k}, b_{k})\}_{k=1}^{\infty}$ containing $A$ and such that $\displaystyle\sum_{k=1}^{\infty}(b_{k} - a_{k}) < \displaystyle\frac{\epsilon}{N}$. Now, $f$ is everywhere differentiable on $[0,1]$, so it's continuous. And we know that for any $k$, $f([a_{k},b_{k}])$ is one of $[f(a_{k}), f(b_{k})]$ or $[f(b_{k}), f(a_{k})]$, call it $I_{k}$. From monotonicity and subadditivity of $m$ we obtain:
+$$m(f(A)) = m\left(f\left(\bigcup_{k=1}^{\infty}(a_{k},b_{k})\right) \leq m\left(\bigcup_{k=1}^{\infty}f(a_{k},b_{k})\right) \leq m\left(\bigcup_{k=1}^{\infty}f([a_{k},b_{k}])\right) \leq\displaystyle\sum_{k=1}^{\infty}m(I_{k})$$
+Since $f$ is everywhere differentiable, we can apply the mean value theorem to get $m(I_{k}) = |f(b_{k}) - f(a_{k})| = f'(c_{k})|b_{k} - a_{k}|$ for all $k$, where $c_{k} \in [a_{k}, b_{k}]$. If we assume that $f'$ is bounded by $N$ on $[0,1]$, then we have $m(I_{k}) \leq N(b_{k}-a_{k})$ for all $k$, and the sum above becomes
+$$\displaystyle\sum_{k=1}^{\infty}m(I_{k}) \leq N\displaystyle\sum_{k=1}^{\infty}(b_{k} - a_{k}) < N\cdot\displaystyle\frac{\epsilon}{N} = \epsilon$$
+Since $\epsilon$ was arbitrary, this shows $m(f(A)) = 0$. Now define a sequence of functions $f_{n} = \chi_{A_{n}}$, where $A_{n} = \{x \in f(A) : f'(x) < n \}$. Then $\{f_{n}\}$ is a sequence of non-negative measurable functions on $[0,1]$, so we may apply the Monotone Convergence Theorem to conclude
+$$m(f(A)) = \displaystyle\int_{0}^{1}\chi_{f(A)} = \displaystyle\int_{0}^{1}\lim_{n\to\infty}f_{n} = \lim_{n\to\infty}\displaystyle\int_{0}^{1}f_{n} = \lim_{n\to\infty}m(f(A) \cap A_{n}) = \lim_{n\to\infty} 0 = 0$$
+where the second to last equality follows from the case $f' < N$.
+}
+
+\end{homeworkProblem}
+
+\clearpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem} Find a conformal map $h$ of the circular sector common to the circles $\{|z-1| = 1\}$ and $\{|z-i| = 1\}$ to the right half plane. Find $h^{-1}(1)$.
+
+\problemAnswer{ % Answer
+Denote the sector by $\Omega$. The map $\displaystyle\frac{1+z/2}{1-z/2}$ takes $\{|z| < 2\}$ conformally to the right half plane. It's a Mobius transformation, so circles map to lines or circles. For the circle $\{|z-i| = 1\}$, we have $2i \mapsto i, 0 \mapsto 1, (1 + i) \mapsto 1 + 2i$, so that circle is mapped to the vertical line $\Re z = 2$. For the other circle, $0 \mapsto 1$ and $2 \mapsto \infty$ so its image is the plane $\{\Re z \geq 1\}$. Since intersections are preserved, we find the image of $\Omega$ is the right half of the disk $\{|z - (1 + i)| \leq 1\}$
+
+Next, we translate this circle by $-(1 + i)$ and square to get the unit disk. So, 
+$$g(z) = \left(\displaystyle\frac{1+z/2}{1-z/2} - (1 + i)\right)^{2}$$
+is a conformal map from $\Omega$ to the unit disk $D$.
+To get from $D$ to the right half plane, apply $\displaystyle\frac{z+1}{1 -z}$. Thus
+$$h(z) = \displaystyle\frac{g(z) + 1}{1 - g(z)}$$ is the desired map. To find $h^{-1}(1)$, we trace backwards. We need the point $z$ with $g(z) = 0$, since then $h(z) = 1$. Since the only square root of $0$ is $0$, it suffices to solve
+$$\displaystyle\frac{1+z/2}{1-z/2} - (1 + i) = 0$$
+After some algebra, we get $z = \displaystyle\frac{2+4i}{5}$.
+}
+
+\end{homeworkProblem}
+
+\clearpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 3
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+Let $f: [0, \infty) \rightarrow [0, \infty)$ be a uniformly continuous function so that $\displaystyle\int_{0}^{\infty}f(x)\ dx < \infty$.
+
+Show that $\lim_{x\to\infty}f(x)$ exists and $\lim_{x\to\infty}f(x) = 0$.
+
+Prove that $f$ uniformly continuous cannot be relaxed to $f$ being continuous, by constructing a continuous function $f: [0,\infty) \rightarrow [0, \infty)$ so that $\displaystyle\int_{0}^{\infty}f(x) \ dx < \infty $ but $f(x)$ does not converge to $0$ as $x$ tends to $\infty$.
+\\
+
+\problemAnswer{ 
+If the limit exists, it must be $0$. Indeed, suppose $\lim_{x\to\infty}f(x) = L > 0$. So for all $\epsilon > 0$, there exists $N$ such that $x > N \Rightarrow |f(x) - L| < \epsilon$. Let $\epsilon = \frac{L}{2}$. Then for $x > N, |f(x) - L| < \frac{L}{2} \Rightarrow |f(x)| > \frac{L}{2}$ and we have
+$$\displaystyle\int_{0}^{\infty}f(x)\ dx \geq \displaystyle\int_{N}^{\infty}f(x)\ dx \geq \displaystyle\int_{N}^{\infty}\displaystyle\frac{L}{2} = \infty,$$
+contradicting integrability of $f$. Now we show the limit exists. If not, then certainly the limit is not zero. That is, there exists $\epsilon > 0$ and a sequence of points $(x_{n})$ with $f(x_{n}) \geq \epsilon$ for all $n$. By uniform continuity, there exists $\delta$ such that $|x-y| < \delta \Rightarrow |f(x) - f(y)| < \frac{\epsilon}{2}$. But then
+$$\displaystyle\int_{0}^{\infty}f(x) \ dx \geq \sum_{n=1}^{\infty}\displaystyle\int_{x_{n} - \delta/2}^{x_{n} + \delta/2}f(x)\ dx > \displaystyle\sum_{n=1}^{\infty}\delta\epsilon = \infty,$$
+contradicting the integrability of $f$. Therefore the limit must exist, and by above it must be $0$.
+\\
+
+For a counterexample, consider $f$ defined by a sequence of spikes along the positive x axis. The spikes will shrink in size, so that the total area underneath will be finite, but the spikes will increase in height so that $f$ will not converge to $0$ as $x \to \infty$. To be more precise, define $f$ by the following. On each interval $[n, n+1]$, $f$ starts at $0$ and increases linearly until it reaches its peak value $n^{2}$, and then decreases linearly until it reaches $0$ again, at which point it stays at $0$ until it hits $(n+1)$. The base of the spike will have length $\displaystyle\frac{1}{n^{4}}$, so that $f$ will be nonzero from $n$ to $n + \displaystyle\frac{1}{n^{4}}$ for each $n$. The integral of $f$ will be the total area under all spikes. For each spike, the area is $\displaystyle\frac{1}{2}$(base)(height) = $\displaystyle\frac{1}{2n^{2}}$. Thus the integral is $\displaystyle\sum_{n=1}^{\infty}\displaystyle\frac{1}{2n^{2}} < \infty$. But clearly $f$ does not converge to $0$ as $x \to \infty$.
+}
+
+\end{homeworkProblem}
+
+\clearpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 4
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+Let $f$ be an analytic homeomorphism from $\{0 < |z| < 1\}$ to $\{0 < |z| < 1\}$. Show that $f$ extends to an analytic homeomorphism from $\{|z| < 1\}$ to $\{|z| < 1\}$. Show that $f$ has the form $\alpha z$ for $|\alpha| = 1$.
+\\
+
+\problemAnswer{ 
+First note that $0$ is a removable singularity of $f$ since
+$$\lim_{z\to 0}|zf(z)| \leq \lim_{z\to 0}|z| = 0.$$
+Therefore $f$ extends to an analytic function $g: D \rightarrow D$; specifically, $g(0) = 0$ and $g = f$ elsewhere. In fact, $g$ is a homeomorphism. Furthermore, $g^{-1}$ is analytic from $D$ to itself and $g^{-1}(0) = 0$. So by Schwarz Lemma, $|g^{-1}(z)| \leq |z|$ for all $z \in D$. If for any $z$ we had strict inequality $|g(z)| < |z|$, this would imply
+$$|g(z)| < |z| = |g^{-1}(g(z))|,$$
+contradicting the Schwarz Lemma applied to $g^{-1}$. Therefore it must be the case that $|g(z)| = |z|$; that is, $g(z) = \alpha z$ is a rotation ($|\alpha| = 1$). Hence so is $f$.
+\\
+
+An alternative solution is to note that all analytic isomorphisms of the unit disk are of the form
+$$\displaystyle\frac{\alpha - z}{1 - \bar{\alpha}z} \cdot e^{i\theta}$$
+But $g(0) = 0$ implies $\alpha = 0$, whence $g(z) = -ze^{i\theta}$, $|g(z)| = |z|$ and $g(z)$ is a rotation.
+}
+\end{homeworkProblem}
+
+\clearpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 5
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+(\textbf{In this problem, you may not appeal to the Ergodic Theorem.}) Let $m$ denote Lebesgue measure on $[0,1]$. Suppose $T: [0,1] \rightarrow [0,1]$ is a Lebesgue measurable function such that for every measurable set $E \subset [0,1]$, if $T^{-1}E = E$ then either $m(E) = 0$ or $m([0,1]\setminus E) = 0$.
+\\
+
+\problemAnswer{
+
+}
+
+%--------------------------------------------
+
+\end{homeworkProblem}
+
+\clearpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 6
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+Let $\mathcal{U}$ be the set of real-valued functions that: on $\{|z| < 1\}$ are harmonic and on $\{|z| \leq 1\}$ are continuous and have absolute value bounded by a positive constant $M$. Show that the $k^{th}$, $k < 0$, derivatives of elements of $\mathcal{U}$ are uniformly bounded on compact subsets of $\{|z| < 1\}$. Explain why $\mathcal{U}$ is a normal family of harmonic functions.
+\\
+
+\problemAnswer{ 
+}
+
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
