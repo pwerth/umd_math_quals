@@ -13,6 +13,8 @@
 \usepackage{amsfonts}
 \usepackage{amsmath}
 \usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsthm}
 
 % Margins
 \topmargin=-0.45in
@@ -84,7 +86,7 @@
 %	NAME AND CLASS SECTION
 %----------------------------------------------------------------------------------------
 
-\newcommand{\hmwkTitle}{Analysis - January, 2016} % Assignment title
+\newcommand{\hmwkTitle}{Analysis - August, 2015} % Assignment title
 \newcommand{\hmwkDueDate}{Monday,\ January\ 1,\ 2012} % Due date
 \newcommand{\hmwkClass}{UMD Math Qualifying Exam Solutions} % Course/class
 \newcommand{\hmwkAuthorName}{Phil Wertheimer} % Your name
@@ -98,48 +100,21 @@
 %----------------------------------------------------------------------------------------
 
 \begin{homeworkProblem}
-Let $m$ be the Lebesgue measure on $\mathbb{R}$. For $A \subset \mathbb{R}$ define
-$$m_{*}(A) = \sup\{m(F) : F \subset A, \ F \textrm{ closed}\}$$
+Let $m$ denote the Lebesgue measure restricted to the compact interval $[0,1]$. Let $\{f_{n}\}_{n\geq 1}$ be a sequence of continuously differentiable functions on $[0,1]$. Assume that:\\
+\indent (a) $f_{n}(0) = 0$ for each $n \geq 1$,\\
+\indent (b) $|f'_{n}| \leq x^{-1/2}$ a.e., \\
+\indent (c) there exists a (Lebesgue) measurable function $h$ on $[0,1]$ such that $\lim_{n\to\infty}f_{n}'(x) = h(x)$ for each $x \in [0,1]$\\
 
-\begin{homeworkSection}{(a)}
-Prove that $m_{*}(A) \leq m^{*}(A)$ for each $A \subset \mathbb{R}$ where $m^{*}$ denotes the Lebesgue outer measure. Conclude that if $A$ is Lebesgue measurable then $m^{*}(A) = m_{*}(A)$.\newline
-
-\problemAnswer{
-By monotonicity of outer measure, and since closed sets are measurable,
-\begin{align*}
-    m_{*}(A) &= \sup\{m(F) : F \subset A, \ F \ \textrm{closed}\} \\
-    &= \sup\{m^{*}(F) : F \subset A, \ F \ \textrm{closed}\} \\
-    &\leq m^{*}(A)
-\end{align*}
-
-Suppose $A$ is measurable. We first deal with the finite measure case $m(A) < \infty$. By the characterization of measurable sets, there exists a closed set $K \subset A$ with $m(A \setminus K) \leq \epsilon$. Since $m(A) < \infty$ we can use the excision property: $m(A) - m(K) \leq \epsilon$. This implies
-$$m^{*}(A) \geq m_{*}(A) \geq m(K) \geq m(A) - \epsilon = m^{*}(A) - \epsilon$$
-Since $\epsilon$ is arbitrary, we have $m_{*}(A) \geq m^{*}(A)$, hence equality. For the infinite measure case, 
-$$\infty = m(A) = \lim_{n\to\infty}m(A\cap[-n,n]) = \lim_{n\to\infty}m^{*}(A\cap[-n,n]) = \lim_{n\to\infty}m_{*}(A\cap[-n,n]) \leq \lim_{n\to\infty}m_{*}(A) = m_{*}(A)$$
-where the fourth equality follows from the finite measure case.
-}
-\end{homeworkSection}
-
-%--------------------------------------------
-
-\begin{homeworkSection}{(b)}
-Let $A \subset \mathbb{R}$ be such that $m^{*}(A) < \infty$. Prove that if $m_{*}(A) = m^{*}(A)$, then $A$ is Lebesgue measurable. Show by a counterexample that the condition $m^{*}(A) < \infty$ is necessary.\newline
+Prove that there exists an absolutely continuous function $f$ such that $f_{n}$ converges to $f$ uniformly on $[0,1]$.\\
 
 \problemAnswer{
- 
- Let $m^{*}(A) = m_{*}(A) < \infty$. Let $\epsilon > 0$. By definition of $m_{*}$, there exists a closed set $F \subset A$ with $m(F) > m_{*}(A) - \frac{\epsilon}{2}$. And by definition of $m^{*}$ there exists an open set $O \supset A$ with $m(O) < m^{*}(A) + \frac{\epsilon}{2}$. Since $F$ and $O$ are measurable sets of finite measure, we can apply monotonicty of outer measure and the excision property to conclude that
-\begin{align*}
-    m^{*}(O - A) \leq m^{*}(O - F) &= m*(O) - m^{*}(F) \\
-    &< m^{*}(A) + \frac{\epsilon}{2} - m^{*}(F)\\
-    &< m^{*}(A) + \frac{\epsilon}{2} - (m_{*}(A) - \frac{\epsilon}{2})\\
-    &= \epsilon
-\end{align*}
-Since we have found a measurable open set $O \supset A$ with $m^{*}(O - A) < \epsilon$ for arbitrary $\epsilon$, the characterization of measurable sets implies that $A$ is measurable. The assumption of finite outer measure is nececssary. As a counterexample, let $N \subset [0,1]$ be nonmeasurable and take $A = N \cup [2, \infty)$. Then $A$ is clearly nonmeasurable, but $m^{*}(A) = m_{*}(A) = \infty$. Indeed, $A$ contains the closed set $[2, N]$ for $N$ arbitrary large, so that $m_{*}(A) \geq N - 2$ for all $N > 2$, so $m_{*}(A) = \infty$. And since the outer measure of an interval is its length we have $m^{*}(A) \geq m^{*}([2, N]) = N - 2$ for all $N > 2$ which implies $m^{*}(A) = \infty$. 
+By the fundamental theorem of calculus, for each $n\geq 1$ and each $x\in [0,1]$ we have 
+$$f_{n}(x) = f_{n}(0) + \displaystyle\int_{0}^{x}f_{n}'(t)\ dt = \displaystyle\int_{0}^{x}f_{n}'(t)\ dt$$
+Since $x^{-1/2} \in L^{1}[0,1]$, condition (b) with the Lebesgue Dominated Convergence Theorem gives
+$$\lim_{n\to\infty}\displaystyle\int_{0}^{x}f_{n}'(t)\ dt = \displaystyle\int_{0}^{x}\lim_{n\to\infty}f_{n}'(t)\ dt = \displaystyle\int_{0}^{x}h(t)\ dt$$
+Define $f(x) = \displaystyle\int_{0}^{x}h(t)\ dt$. Then $f$ is absolutely continuous since it is the integral of an $L^{1}$ function $h$, and we have $f_{n}\rightrightarrows f$ since $\forall x\in[0,1]$,
+$$|f_{n}(x) - f(x)| = \left|\displaystyle\int_{0}^{x}f_{n}'(t)\ dt - \displaystyle\int_{0}^{x}h(t)\ dt\right| = \left|\displaystyle\int_{0}^{x}(f_{n}'(t) - h(t))\ dt\right| \leq \displaystyle\int_{0}^{x}|f_{n}'(t) - h(t)| \ dt \rightarrow 0$$
 }
-\end{homeworkSection}
-
-%--------------------------------------------
-
 \end{homeworkProblem}
 
 \clearpage
@@ -149,29 +124,31 @@ Since we have found a measurable open set $O \supset A$ with $m^{*}(O - A) < \ep
 %----------------------------------------------------------------------------------------
 
 \begin{homeworkProblem}
-Let $f(z)$ be a continuous function on the unit disk $D := \{z \in \mathbb{C} : |z| \leq 1\}$ which is holomorphic for $|z| < 1$, and such that $|f(z)| = 1$ for all $|z| = 1$.
 
-%--------------------------------------------
-
-\begin{homeworkSection}{(a)}
-Show that if $f$ has no zero in $D$, then $f$ must be constant.\newline
+\begin{homeworkSection}{(a)} % Section within problem
+Find an analytic isomorphism $f$ of the domain $U = \{z : |\Im z | < 1\}$ onto the unit disc \textbf{D} = $\{z : |z| < 1\}$, such that $f(0) = 0$, and evaluate $M = |f'(0)|$. \newline
 
 \problemAnswer{
-By the Maximum Modulus Principle, $|f|$ is maximized on the boundary $\{|z| = 1\}$. If $f \neq 0$ in $D$, then the function $\displaystyle\frac{1}{f}$ is holomorphic in $D$. Applying the Maximum Modulus Principle again, $\left|\displaystyle\frac{1}{f}\right|$ must also achieve its maximum on $\{|z| = 1\}$. Equivalently, $|f|$ must attain its minimum on $\{|z| = 1\}$. Combining these two observations, we see that $|f|$ must be constant on $D$.\\
-        
-Now, since $f$ is holomorphic in $D$, the Open Mapping Theorem implies that $f$ is either constant or its image is an open set. But since $|f|$ is constant, the image of $f$ must lie inside the circle of radius $|f|$, so it cannot be open in $\mathbb{C}$. Therefore $f$ is constant.
+Define $g(z) = \displaystyle\frac{\pi}{2}z$; this maps $U$ into the horizontal strip $S := \{z : |\Im z | < \frac{\pi}{2}\}.$\\
+Define $h(z) = e^{z}$; this maps $S$ into the right half plane.\\
+Define $k(z) = \displaystyle\frac{z-1}{z+1}$; this maps the right half plane into \textbf{D}.\\
+Now let $f(z) = (g\circ h\circ k)(z) = \displaystyle\frac{e^{\frac{\pi}{2}z} - 1}{e^{\frac{\pi}{2}z} + 1}$. This is an analytic isomorphism $U \rightarrow$ \textbf{D} with $f(0) = \displaystyle\frac{0}{2} = 0$. We have 
+$$f'(z) = \displaystyle\frac{\frac{\pi}{2}(e^{\frac{\pi}{2}z} + 1) - (e^{\frac{\pi}{2}z} - 1)\frac{\pi}{2}e^{\frac{\pi}{2}z}}{(e^{\frac{\pi}{2}z} + 1)^{2}}$$
+And so
+$$M = |f'(0)| = \left|\displaystyle\frac{\frac{\pi}{2}(2) - 0}{4}\right| = \displaystyle\frac{\pi}{4}$$
 }
 \end{homeworkSection}
 
 %--------------------------------------------
 
-\begin{homeworkSection}{(b)}
- Characterize all such $f$ with exactly one zero (with multiplicity) in $D$.
+\begin{homeworkSection}{(b)} % Section within problem
+Prove that if $g$ is any analytic isomorphism of \textbf{D} onto $U$ such that $g(0) = 0$, then $|g'(0)| \leq \displaystyle\frac{1}{M}$. \newline
 
 \problemAnswer{
-Let $f$ be as above, and suppose $f$ has exactly one zero in $w \in D$. Write $f(z) = (z-w)g(z)$ where $g$ is holomorphic and $g(w) \neq 0$.\newline
-        
-If $w = 0$ then $f(z) = zg(z) \Rightarrow |f(z)| = |z|\cdot|g(z)|$ so on the boundary $|z| = 1$ we have $|g(z)| = |f(z)|$ is constant of modulus one by part (a). Then $f(z) = cz$ for some $c \in \mathbb{C}$, $|c| = 1$, so $f$ is a rotation. Consider the transformation $T(z) = \displaystyle\frac{w-z}{1-\bar{w}z}$. We have $f(T(0)) = f(w) = 0$. Furthermore $T$ preserves the boundary $\partial D$ so that $|f\circ T| = 1$ on $\partial D$. Therefore the above argument gives $f\circ T(z) = cz \Rightarrow f(z) = f\circ T\circ T(z) = cT(z)$. Note we used the fact that $T\circ T$ is the identity map.
+If $g: D \rightarrow U$ is an analytic isomorphism then $f\circ g: D \rightarrow D$ is also an analytic isomorphism and we have $(f\circ g)(0) = f(g(0)) = f(0) = 0$. Therefore by the Schwarz Lemma we have $|(f\circ g)'(0)| \leq 1$. By the chain rule, this implies that
+$$|f'(g(0))\cdot g'(0)| \leq 1$$
+Since $g(0) = 0$, this becomes
+$$|f'(0) \cdot g'(0)| \leq 1 \Rightarrow |g'(0)| \leq \displaystyle\frac{1}{|f'(0)|} = \displaystyle\frac{1}{M}$$
 }
 \end{homeworkSection}
 
@@ -186,49 +163,23 @@ If $w = 0$ then $f(z) = zg(z) \Rightarrow |f(z)| = |z|\cdot|g(z)|$ so on the bou
 %----------------------------------------------------------------------------------------
 
 \begin{homeworkProblem}
-Let $f: [a,b] \rightarrow \mathbb{R}$ be a function of bounded variation. Suppose $V: [a,b] \rightarrow [0, \infty)$ is the function that assigns to each $x \in [a,b]$ the total variation $V(x)$ of $f$ over $[a,x]$. The variation $f$ over a subinterval $[c,d]$ will be denoted by $V_{c}^{d}f$.
+Let $m$ denote the Lebesgue measure on $\mathbb{R}$, and $E \subset \mathbb{R}$. Prove that $E$ is Lebesgue measurable if and only if there exist a $G_{\delta}$ set $G$, and a $F_{\sigma}$ set $F$ such that $F \subset E \subset G$ and $m(G\setminus F) = 0$. Conclude that in this case, $m(F) = m(G) = m(E)$. \newline
 
-%--------------------------------------------
+\problemAnswer{ 
+First suppose $m^{*}(E) < \infty$. By definition of outer measure, for any $\epsilon > 0$, there is a collection $\{I_{k}\}$ of disjoint open intervals with $\sum_{k=1}^{\infty}\ell(I_{k}) < m^{*}(E) + \epsilon$. Defining $\mathcal{O} = \cup_{k=1}^{\infty}I_{k}$ gives an open set containing $E$ for which $m^{*}(O) < m^{*}(E) < \epsilon$. Since both have finite outer measure, we can apply excision and conclude that $m^{*}(\mathcal{O}\setminus E) < \epsilon$. \newline
 
-\begin{homeworkSection}{(a)}
-Prove that $|f'| \leq V'$ a.e. on $[a,b]$, and from this deduce that
-$$\displaystyle\int_{a}^{b}|f'| \leq V_{a}^{b}f$$
+If $m^{*}(E) = \infty$, define $E_{n} = E \cap [-n,n]$ and for each $n$ choose $\mathcal{O}_{n} \supset E_{n}$ with $m^{*}(\mathcal{O}_{n}\setminus E_{n}) < \frac{\epsilon}{2^{n}}$. Then $\mathcal{O} = \cup_{n=1}^{\infty}\mathcal{O}_{n}$ is an open set containing $E$, and by monotonicty and subadditivity of outer measure we have
+$$m^{*}((\cup_{n=1}^{\infty}\mathcal{O}_{n})\setminus E) = m^{*}(\cup_{n=1}^{\infty}(\mathcal{O}_{n}\setminus E)) \leq m^{*}(\cup_{n=1}^{\infty}(\mathcal{O}_{n}\setminus E_{n})) \leq \sum_{n=1}^{\infty}m^{*}(\mathcal{O}_{n}\setminus E) < \sum_{n=1}^{\infty}\frac{\epsilon}{2^{n}} = \epsilon$$
 
-\problemAnswer{
-First note that $f$, being a function of bounded variation, is differentiable a.e. on $[a,b]$. The same is true of $V$ because it is increasing. Now, simply use the definition of derivative to obtain
-\begin{align*}
-    |f'| = \left|\lim_{h\to 0}\displaystyle\frac{f(x+h)-f(x)}{h}\right| &= \lim_{h\to 0}\left|\displaystyle\frac{f(x+h)-f(x)}{h}\right| \\
-    &\leq \lim_{h\to 0}\left|\displaystyle\frac{V_{x}^{x+h}f}{h}\right| \\
-    &= \lim_{h\to 0}\displaystyle\frac{V(x+h)-V(x)}{h} = V'(x)
-\end{align*}
-Therefore $\displaystyle\int_{a}^{b}|f'| \leq \displaystyle\int_{a}^{b}V' \leq V(b) - V(a) = V_{a}^{b}f$, where the second inequality follows from the monotonicity of $V$.
+We have thus shown that for any measurable set $E$, there exists an open set $\mathcal{O}\supset E$ with $m^{*}(\mathcal{O}\setminus E) < \epsilon$. Now, for each $n\geq 1$, choose an open set $\mathcal{O}_{n}$ containing $E$ for which $m^{*}(\mathcal{O}_{n} \setminus E) < \frac{1}{n}$. Define $G = \cap_{n=1}^{\infty}\mathcal{O}_{n}$. Then $G$ is by construction a $G_{\delta}$ set containing $E$. And by monotonicity, $m^{*}(G\setminus E) \leq m^{*}(\mathcal{O}_{n}\setminus E) < \frac{1}{n}$ for all $n$. Therefore $m^{*}(G\setminus E) = 0$.\newline
+
+Now consider the measurable set $E^{c}$. By the above argument there exists a $G_{\delta}$ set $G \supset E^{c}$ with $m^{*}(G\setminus E) = 0$. But then $E \supset G^{c}$, where $G^{c}$ is an $F_{\sigma}$ set. And $m^{*}(E^{c}\setminus G^{c}) = m^{*}(E^{c}\cap G) = m^{*}(G\setminus E) = 0$.
+
+When $E$ is measurable, by definition and monotonicity we have
+$$m(G) = m^{*}(G) = m^{*}(G\cap E) + m^{*}(G\setminus E) = m^{*}(E) + 0 = m(E)$$
+$$m(E) = m^{*}(E) = m^{*}(E\cap F) + m^{*}(E\setminus F) = m^{*}(F) + 0 = m(F) $$
+Therefore $m(F) = m(G) = m(E)$.
 }
-\end{homeworkSection}
-
-%--------------------------------------------
-
-\begin{homeworkSection}{(b)}
-Use part a to prove that if $\int_{a}^{b}|f'| = V_{a}^{b}f$ and if $[c,d] \subset [a,b]$ then 
-$$\displaystyle\int_{c}^{d}|f'| = V_{c}^{d}f$$
-
-\problemAnswer{
-The inequality $\int_{c}^{d}|f'| \leq V_{c}^{d}f$ follows immediately from part a applied to the subinterval $[c,d]$. For the reverse inequality, we apply part a to the subintervals $[a,c]$ and $[d,b]$ to obtain
-$$\displaystyle\int_{c}^{d}|f'| = \displaystyle\int_{a}^{b}|f'| - \left(\displaystyle\int_{a}^{c}|f'| + \displaystyle\int_{d}^{b}|f'|\right) = V_{a}^{b}f - \left(\displaystyle\int_{a}^{c}|f'| + \displaystyle\int_{d}^{b}|f'|\right) \geq V_{a}^{b}f - (V_{a}^{c}f + V_{d}^{b}f) = V_{c}^{d}f$$
-}
-\end{homeworkSection}
-
-%--------------------------------------------
-
-\begin{homeworkSection}{(c)}
-Use part b to prove that if $\int_{a}^{b}|f'| = V_{a}^{b}f$ then $f$ is absolutely continuous
-
-\problemAnswer{ % Answer
-If $\int_{a}^{b}|f'| = V_{a}^{b}f$ then $V$ is absolutely continuous, being the integral of an $L^{1}$ function. So let $\epsilon > 0$ and let $\{(a_{k},b_{k})\}_{k=1}^{N}$ be disjoint in $[a,b]$ with $\sum_{k=1}^{N}(b_{k}-a_{k}) < \delta$, where $\delta$ answers the $\epsilon$-challenge for the absolute continuity of $V$. Then
-$$\displaystyle\sum_{k=1}^{N}|f(b_{k})-f(a_{k})| < \sum_{k=1}^{N}V_{a_{k}}^{b_{k}}f = \sum_{k=1}^{N}V(b_{k}) - V(a_{k}) < \epsilon$$
-}
-\end{homeworkSection}
-
-%--------------------------------------------
 
 \end{homeworkProblem}
 
@@ -239,24 +190,32 @@ $$\displaystyle\sum_{k=1}^{N}|f(b_{k})-f(a_{k})| < \sum_{k=1}^{N}V_{a_{k}}^{b_{k
 %----------------------------------------------------------------------------------------
 
 \begin{homeworkProblem}
-Show that the series
-$$f(z) = \sum_{n=0}^{\infty}\frac{(-1)^{n}}{z+n} $$
-defines a meromorphic function $f(z)$ on the whole complex plane $\mathbb{C}$. Find the poles of $f(z)$.\\
+Recall the circle mean value property for a function $u(x,y)$ defined in an open domain $\mathcal{D}$ :\\
+If a circle $C$ of radius $r$ centerered at $z_{0} = (x_{0}, y_{0})$ is a boundary of a closed disc $B \subset \mathcal{D}$ then
+$$u(x_{0},y_{0}) = \displaystyle\frac{1}{2\pi}\int_{C}u(z_{0} + re^{i\theta}) d\theta$$
+Prove that a continous function $u(x,y)$ defined in an open domain $\mathcal{D}$ is harmonic if and only if it satisfies the circle mean value property.\\
 
 \problemAnswer{ 
-It suffices to show that $f(z)$ is meromorphic in every compact set $K \subset \mathbb{C}$. Choose $R$ so that $K$ is contained in the closed disk of radius $R, D_{R}$. Write 
-$$f(z) = \displaystyle\sum_{n=0}^{\infty}\displaystyle\frac{(-1)^{2n}}{z+2n} + \displaystyle\sum_{n=0}^{\infty}\displaystyle\frac{(-1)^{2n+1}}{z+2n+1} = \displaystyle\sum_{n=0}^{\infty}\displaystyle\frac{1}{(z+2n)(z+2n+1)}$$
+One direction is straightforward: suppose $u$ is harmonic in $\mathcal{D}$. Write $u = \Re(f(z))$ where $f$ is analytic in $\mathcal{D}$. By Cauchy's Integral Formula for analytic functions, we have
+$$f(z_{0}) = \displaystyle\frac{1}{2\pi i}\displaystyle\int_{C}\displaystyle\frac{f(z)}{z-z_{0}}\ dz$$
+Substituting $z=z_{0} + re^{i\theta}$ gives
+$$ f(z_{0}) = \displaystyle\frac{1}{2\pi i}\displaystyle\int_{0}^{2\pi}\displaystyle\frac{f(z_{0} + re^{i\theta})}{re^{i}\theta}rie^{i\theta}\ d\theta = \displaystyle\frac{1}{2\pi}\displaystyle\int_{0}^{2\pi}f(z_{0} + re^{i\theta})\ d\theta $$
 
-Now pick $N > R$ and split $f(z)$ into
-$$\displaystyle\sum_{n=0}^{N}\displaystyle\frac{1}{(z+2n)(z+2n+1)} + \displaystyle\sum_{n=N+1}^{\infty}\displaystyle\frac{1}{(z+2n)(z+2n+1)}$$
+Taking the real part of both sides yields the circle mean value property.\newline
 
-The first sum gives a meromorphic function in $D_{R}$ because there are only finitely many terms. I claim the second sum is an analytic function in $D_{R}$. Indeed, the reverse triangle inequality gives $|z+2n| \geq 2n - |z| \geq 2n - R$ and similarly $|z+2n+1| \geq 2n + 1 - |z| \geq 2n - R$, which implies
-$$\left|\displaystyle\frac{1}{(z+2n)(z+2n+1)}\right| \leq \displaystyle\frac{1}{(2n-R)^{2}}$$
-Again using the reverse triangle inequality, 
-$$|2n-R| \geq |2n| - R = 2n - R > n - R > n$$
-Putting this all together gives
-$$\displaystyle\sum_{n=N+1}^{\infty}\displaystyle\frac{1}{(z+2n)(z+2n+1)} < \displaystyle\sum_{n=N+1}^{\infty}\displaystyle\frac{1}{n^{2}} < \infty$$
-Therefore the second sum converges. Since $f(z)$ is the sum of a meromorphic and analytic function in $K$, it is meromorphic in $K$. This holds for all compact $K$ so $f$ defines a meromorphic function on $\mathbb{C}$. Clearly, its poles are at the negative integers.
+The converse is harder and requires some facts about harmonic functions. The first useful fact is that harmonic functions satisfy the Identity Principle: if $h$ is harmonic on a domain $D$ and $h \equiv 0$ on a non-empty open subset $U$ of $D$ then $h\equiv 0$ throughout $D$.\newline
+
+\textit{Proof of Identity Princple for Harmonic Functions:} Since $h$ is harmonic, write $h = \Re(f)$ for $f$ holomorphic, say $f = h + ik$. Then the Cauchy-Riemann equations give
+$$f' = h_{x} + ik_{x} = h_{y} - ih_{y}$$
+Set $g = h_{x} - ih_{y}$. Then $g$ is continuous and satisfies the Cauchy-Riemann equations because $h_{xx} = -h_{yy}$ ($h$ is harmonic) and $h_{xy} = h_{yx}$. Therefore $g$ is holomorphic on $D$. Since $h = 0$ on $U$, $g=0$ on $U$. Hence the Identity Principle for holomorphic functions implies $g=0$ on $D$, and it follows that $h_{x} = h_{y} = 0$ on $D$. This implies $h$ is constant on $D$ and since it's zero in $U$ the constant must be $0$.\qed\newline
+
+The second useful fact is that harmonic functions satisfy the Maximum Modulus Principle: if $h$ is a non-constant harmonic function in a region $\Omega \subset \mathbb{C}$ then $h$ has no maxima inside $\Omega$.\newline
+
+\textit{Proof of MMP for Harmonic Functions:} Let $a \in \Omega$ and choose $\epsilon$ with $B(a, \epsilon) \subset \Omega$. There is a holomorphic $f$ on $B(a, \epsilon)$ with $h = \Re(f)$. $f$ is not constant on $B(a, \epsilon)$ - otherwise $h$ would also be constant there, and hence constant on $\Omega$ by the Identity Principle for Harmonic Functions. By the Open Mapping Theorem, $f(B(a, \epsilon))$ is an open set, so that $h$ takes values larger than $h(a)$ in $B(a, \epsilon)$.\qed\newline
+
+Now, suppose $u(x,y)$ is continuous and satisfies the circle mean value property. Let $a \in \mathcal{D}$ and choose $\epsilon$ such that $\bar{B}(a, \epsilon) \subset \mathcal{D}$. Using the Poisson Kernel, we can construct a continuous function $h: \bar{B}(a, \epsilon) \rightarrow \mathbb{R}$ which is harmonic in $B(a, \epsilon)$ and $u(z) = h(z)$ on the boundary $\{|z-a| = \epsilon\}$. Since $u-h$ satisfies the mean value property and equals zero on the boundary, the Identity Principle for harmonic functions implies $u\equiv h$ in $B(a, \epsilon)$. In particular, $u$ is harmonic. Since this holds for any open ball in $\mathcal{D}$, $u$ is harmonic in $\mathcal{D}$.
+
+
 }
 
 \end{homeworkProblem}
@@ -268,30 +227,45 @@ Therefore the second sum converges. Since $f(z)$ is the sum of a meromorphic and
 %----------------------------------------------------------------------------------------
 
 \begin{homeworkProblem}
-In this problem, you may assume the Parallelogram Law: for each $f, g \in L^{2}(\mathbb{R})$,
-$$\|f + g\|_{2}^{2} + \|f - g\|_{2}^{2} = 2(\|f\|_{2}^{2} + \|g\|_{2}^{2})$$
-Let $V$ be a closed subset of $L^{2}(\mathbb{R}$). Suppose that for each $f, g \in V$, $\lambda f + (1 - \lambda)g \in V$ whenever $\lambda \in [0,1]$. Prove that for each $f \in L^{2}(\mathbb{R}$) there exists a unique $g \in V$ such that 
-$$\|f - g\|_{2} \leq \|f - h\|_{2} \quad \forall h \in V$$
 
-\problemAnswer{ 
-Let $f \in L^{2}(\mathbb{R})$. Let $\delta = \inf \{||f-g||_{2} : g \in V\}$. By definition of infimum, for all $n\geq 1$ there exists $g_{n} \in V$ with $||f-g_{n}||_{2} < \delta + \frac{1}{n}$. I claim that the sequence $\{g_{n}\}_{n\geq 1}$ is Cauchy. Indeed, let $\epsilon > 0$ and choose $N > \frac{4+8\delta}{\epsilon}$. Then $\forall m,n \geq N$,
-\begin{align*}
-    ||g_{m}-g_{n}||_{2}^{2} = ||(g_{m} - f) + (f - g_{n})||_{2}^{2} &= 2(||g_{m} - f||_{2}^{2} + ||f - g_{m}||_{2}^{2}) - ||g_{m}+g_{n} -2f||_{2}^{2}\\
-    &< 2\left(\delta+\frac{1}{m}\right)^{2} + 2\left(\delta+\frac{1}{n}\right)^{2} - 4\left|\left|\displaystyle\frac{g_{m} + g_{n}}{2} -f\right|\right|_{2}^{2}\\
-    &< 2\left(\delta^{2} + \frac{2\delta}{m} + \frac{1}{m^{2}}\right) + 2\left(\delta^{2} + \frac{2\delta}{n} + \frac{1}{n^{2}}\right) - 4\delta^{2}\\
-    &= \frac{4\delta}{m} + \frac{2}{m^{2}} + \frac{4\delta}{n} + \frac{2}{n^{2}}\\
-    &\leq \frac{4\delta}{N} + \frac{2}{N^{2}} + \frac{4\delta}{N} + \frac{2}{N^{2}} = \frac{8\delta}{N} + \frac{4}{N^{2}} < \frac{8\delta + 4}{N} < \epsilon
-\end{align*}
-Therefore $\{g_{n}\}$ is a Cauchy sequence in $V \subset L^{2}(\mathbb{R})$. By completeness of $L^{2}$, this sequence converges; call the limit $g$. Since $V$ is closed, $g \in V$. Note $||g||_{2}$ = $\lim_{n\to\infty}||g_{n}||$ = $\delta$ as desired.\newline
+Let $m$ denote the Lebesgue measure on $[0,1]$, and let $\{f_{n}\}_{n\geq 1} \subset L_{m}^{2}([0,1])$ be such that for each $\epsilon > 0$, there exists $N_{0} \geq 1$ so that 
+$$\left|\left|\sup_{N > N_{0}}\left|\sum_{n=N_{0}}^{N}f_{n}\right|\right|\right|_{2} < \epsilon$$
+Set $F_{n} = \sum_{k=1}^{n}f_{k}$, $F = \limsup\limits_{n}F_{n}$, and $G = \liminf\limits_{n}F_{n}$. Define
+$$A= \{x \in [0,1] : F(x) > G(x)\}.$$
 
-For uniqueness, if there were two such functions, say $g$ and $h$ with $||f-g||_{2} = ||f-h||_{2} = \delta$, then by similar logic as above we have
-\begin{align*}
-    ||g-h||_{2}^{2} = ||(g-f)+(f-h)||_{2}^{2} &= 2(||g-f||_{2}^{2}) + 2(||f-h||_{2}^{2}) - ||g+h-2f||_{2}^{2} \\
-    &= 4\delta^{2} - 4\left|\left|\displaystyle\frac{g+h}{2} - f\right|\right| \\
-    &< 4\delta^{2} - 4\delta^{2} = 0
-\end{align*}
-Therefore $||g-h||_{2}^{2} = 0$ so $g=h$.
+\begin{homeworkSection}{(a)}
+Show that $A = \displaystyle\bigcup_{k=1}^{\infty}A_{k} = \displaystyle\bigcup_{k=1}^{\infty}\{x \in [0,1] : F(x) > 2^{-k} + G(x)\}$. \newline
+
+\problemAnswer{
+If $x\in A$, then $F(x) > G(x)$, so $F(x) - G(x) > 0$ and there must exist $k \in \mathbb{N}$ with $F(x) - G(x) > 2^{-k} > 0$. Thus $x \in A_{k}$, proving $A \subset \displaystyle\bigcup_{k=1}^{\infty}A_{k}$. Similarly, if $x \in \displaystyle\bigcup_{k=1}^{\infty}A_{k}$ then there exists $k\in\mathbb{N}$ with $F(x) > 2^{-k} + G(x) > G(x)$ so that $x\in A$, whence $\displaystyle\bigcup_{k=1}^{\infty}A_{k} \subset A$. Therefore the sets are equal.
 }
+\end{homeworkSection}
+
+%--------------------------------------------
+
+\begin{homeworkSection}{(b)}
+Prove that for each $\epsilon > 0$ and $k \geq 1$, $m(A_{k}) \leq \epsilon^{2}2^{2k}$. Conclude that the series $\sum_{n=1}^{\infty}f_{n}$ converges a.e. \newline
+
+\problemAnswer{
+Let $\epsilon > 0$; choose $N_{0}$ such that
+$$\left|\left|\sup_{N > N_{0}}\left|\sum_{n=N_{0}}^{N}f_{n}\right|\right|\right|_{2} < \displaystyle\frac{\epsilon^{2}}{4}$$
+
+By Chebyshev's inequality,
+\begin{align*}
+    m(A_{k}) &= m(\{x\in[0,1] : F(x) - G(x) > 2^{-k}\} \\
+    &\leq 2^{2k}\displaystyle\int|F(x)-G(x)|^{2} \\
+    &= 2^{2k}\displaystyle\int|\limsup_{n}F_{n} - \liminf_{n}F_{n}|^{2}\\
+    &\leq 2^{2k}\displaystyle\int\left|\sup_{n > N_{0}}F_{n}- \inf_{n > N_{0}}F_{n}\right|^{2} \\
+    &= 2^{2k}\cdot 4 \displaystyle\int\left|\displaystyle\frac{\sup_{n > N_{0}}F_{n}- \inf_{n > N_{0}}F_{n}}{2}\right|^{2} \\
+    &\leq 2^{2k}\cdot 4 \displaystyle\int|\sup_{n > N_{0}}|F_{n}-F_{N_{0}}||^{2}\\
+    &< \epsilon^{2}2^{2k}
+\end{align*}
+Since $\epsilon$ was arbitrary, this shows $m(A_{k}) = 0$ for all $k$. Thus $m(A) = 0$, so that $F(x) = G(x)$ a.e. This means $\limsup_{n}\sum_{k=1}^{n}f_{k} = \liminf\sum_{k=1}^{n}f_{k}$ a.e. so that $\sum f_{n}$ converges a.e.
+}
+\end{homeworkSection}
+
+%--------------------------------------------
+
 \end{homeworkProblem}
 
 \clearpage
@@ -301,24 +275,53 @@ Therefore $||g-h||_{2}^{2} = 0$ so $g=h$.
 %----------------------------------------------------------------------------------------
 
 \begin{homeworkProblem}
-Evaluate the integral: $\displaystyle\int_{0}^{\infty}\frac{x\sin x}{(x^2+1)(x^2+4)} dx$ \newline
 
-\problemAnswer{ 
-Denote the integral by $I$. Since the integrand is even, we have $I = \displaystyle\frac{1}{2}\int_{-\infty}^{\infty}\frac{x\sin x}{(x^2+1)(x^2+4)} dx$.\\
-Define $f(z) = \displaystyle\frac{ze^{iz}}{(z^2+1)(z^2+4)}$; then $I = \displaystyle\frac{1}{2}\int_{-\infty}^{\infty}\Im(f(z))dz$.\\
+\begin{homeworkSection}{(a)}
+Find the domain of convergence of the power series
+$$\displaystyle\sum_{n=1}^{\infty}\frac{n!(3n)!}{((2n)!)^{2}}z^{n}$$
 
-For each $R > 0$, we consider a semicircular contour $\gamma_{R} = [-R, R] \cup C_{R}$, where $C_{R}$ is the arc $\{Re^{it} : t \in [0, \pi]\}$. Then when $R > 2$, $f$ is holomorphic in $\gamma_{R}$ except at $z = i, 2i$, so we may apply the Residue Theorem. We compute the residues:\\
-$$Res(f;i) = \lim_{z\to i}(z-i)f(z) = \lim_{z\to i}\frac{ze^{iz}}{(z+i)(z^2+4)} = \frac{ie^{-1}}{(2i)(3)} = \frac{1}{6e}$$
-$$Res(f;2i) = \lim_{z\to 2i}(z-2i)f(z) = \lim_{z\to 2i}\frac{ze^{iz}}{(z^2+1)(z+2i)} = \frac{2ie^{-2}}{(-3)(4i)} = \frac{-1}{6e^{2}}$$
-Thus for $R > 2$, 
-$$\displaystyle\int_{\gamma_{R}}f(z)dz = 2\pi i\left(\frac{1}{6e} - \frac{1}{6e^{2}}\right) = \frac{\pi i (e-1)}{3e^{2}}$$
-Now, 
-$$\displaystyle\int_{\gamma_{R}}f(z)dz = \displaystyle\int_{-R}^{R}f(z)dz + \displaystyle\int_{C_{R}}f(z)dz$$
-Letting $R\to 0$, Jordan's lemma gives $\displaystyle\int_{C_{R}}f(z)dz \to 0$, so that
-$$\displaystyle\frac{\pi i (e-1)}{3e^{2}} = \displaystyle\int_{-\infty}^{\infty}f(z)dz$$
-Finally, we have 
-$$I = \frac{1}{2}\int_{-\infty}^{\infty}\Im(f(z))dz = \frac{1}{2}\Im\left(\frac{\pi i(e - 1)}{3e^{2}}\right) = \frac{\pi(e-1)}{6e^{2}}$$
+\problemAnswer{ % Answer
+By the ratio test,
+$$\lim_{n\to\infty}\left|\displaystyle\frac{(n+1)!(3n+3)!}{((2n+2)!)^{2}} \displaystyle\frac{((2n)!)^{2}}{n!(3n)!}\right| = \lim_{n\to\infty}\left|\displaystyle\frac{(n+1)(3n+3)(3n+2)(3n+1)}{(2n+1)^{2}(2n+2)^{2}}\right| 
+    = \lim_{n\to\infty}\left|\displaystyle\frac{27n^{4} + \hdots}{16n^{4} + \hdots}\right| 
+    = \displaystyle\frac{27}{16}
+$$
+
+Therefore the radius of convergence is $\displaystyle\frac{16}{27}$, and so the domain of convergence is $\left\{z \in \mathbb{C} : |z| < \displaystyle\frac{16}{27}\right\}$.
+
 }
+\end{homeworkSection}
+
+\begin{homeworkSection}{(b)} % Section within problem
+Prove that the series diverges at every point on the boundary of the domain of convergence.\newline
+
+\problemAnswer{
+Each point on the boundary of the domain of convergence can be written as $z = \displaystyle\frac{16}{27}e^{i\theta}$. Recall Stirling's approximation:
+$$n! \to \sqrt{2\pi n}\displaystyle\left(\frac{n}{e}\right)^{n}$$
+
+Using this approximation, on the boundary the terms of the power series are given by
+\begin{align*}
+    a_{n} = \frac{n!(3n)!}{((2n)!)^{2}}z^{n} &\to
+    \frac{\sqrt{2\pi n}\left(\displaystyle\frac{n}{e}\right)^{n}\sqrt{6\pi n}\left(\displaystyle\frac{3n}{e}\right)^{3n}}{\left(\sqrt{4\pi n}\left(\displaystyle\frac{2n}{e}\right)^{2n}\right)^{2}}\left(\frac{16}{27}e^{i\theta}\right)^{n} \\
+    &= \displaystyle\frac{\displaystyle\frac{2\sqrt{3}\pi n\cdot n^{n}(3n)^{3n}}{e^{n}e^{3n}}}{\displaystyle\frac{4\pi n(2n)^{4n}}{e^{4n}}}\left(\frac{16}{27}e^{i\theta}\right)^{n} \\
+    &= \displaystyle\frac{2\sqrt{3}\pi n(3n)^{3n}}{e^{4n}}\displaystyle\frac{e^{4n}}{4\pi n(2n)^{4n}}\left(\frac{16}{27}e^{i\theta}\right)^{n}
+\end{align*}
+Thus
+\begin{align*}
+    |a_{n}| \to \left|\displaystyle\frac{2\sqrt{3}\pi n\cdot n^{n}(3n)^{3n}}{4\pi n(2n)^{4n}}\left(\frac{16}{27}e^{i\theta}\right)^{n}\right| 
+    &=
+    \displaystyle\frac{\sqrt{3}}{2}\displaystyle\frac{n^{n}(3n)^{3n}}{(2n)^{4n}}\left(\frac{16}{27}\right)^{n} \\
+    &= \displaystyle\frac{\sqrt{3}}{2}\displaystyle\frac{n^{n}3^{3n}n^{3n}}{2^{4n}n^{4n}}\left(\frac{2^{4}}{3^{3}}\right)^{n} \\
+    &= \displaystyle\frac{\sqrt{3}}{2}
+\end{align*}
+Since the terms do not approach $0$, the series does not converge.
+}
+
+\end{homeworkSection}
+
+%--------------------------------------------
+
 \end{homeworkProblem}
+
 
 \end{document}

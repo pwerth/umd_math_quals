@@ -1,0 +1,302 @@
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage{graphicx} % Required to insert images
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{systeme}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amssymb}
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in 
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+\chead{\hmwkClass\: } % Top center header
+\rhead{\hmwkTitle} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+   
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Analysis - January, 2015} % Assignment title
+\newcommand{\hmwkDueDate}{Monday,\ January\ 1,\ 2012} % Due date
+\newcommand{\hmwkClass}{UMD Math Qualifying Exam Solutions} % Course/class
+\newcommand{\hmwkAuthorName}{Phil Wertheimer} % Your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+Let $m$ denote the Lebesgue measure restricted to the compact interval $[a,b]$.
+
+\begin{homeworkSection}{(a)} % Section within problem
+Prove that a function $f$ defined on the compact interval $[a,b]$ is Lipschitz if and only if there is a constact $c$ and a function $g$ in $L_{m}^{\infty}[a,b]$ such that
+$$f(x) = c + \int_{a}^{x}g \ dm \quad \textrm{for all} \enspace x \in [a,b]$$
+
+\problemAnswer{
+Suppose that $f$ is Lipschitz on $[a,b]$ with Lipschitz constant $K$. Recall that this means for all $x,y \in [a,b]$ we have $|f(x) - f(y)| \leq K|x-y|$. First note that $f$ is absolutely continuous on $[a,b]$ since if $\epsilon > 0$ and $\{(a_{i}, b_{i})\}_{i=1}^{n}$ are disjoint in $[a,b]$ with $\displaystyle\sum_{i=1}^{n}|b_{i} - a_{i}| < \displaystyle\frac{\epsilon}{i}$ then
+$$\sum_{i=1}^{n}|f(b_{i}) - f(a_{i})| \leq \sum_{i=1}^{n}K|b_{i} - a_{i}| = K\sum_{i=1}^{n}|b_{i}-a_{i}| < K\cdot\frac{\epsilon}{K} = \epsilon$$
+Now, since $f$ is absolutely continuous on $[a,b]$, it is differentiable a.e. on $[a,b]$ and we have for all $x \in [a,b]$,
+$$f(x) - f(a) = \int_{a}^{x}f'(t) \ dm$$
+It remains to show that $f' \in L_{m}^{\infty}[a,b]$. This follows directly from the Lipschitz condition:
+$$|f'(x)| = \lim_{h\to 0}\frac{|f(x+h) - f(x)|}{h} = \lim_{h\to 0}\frac{|f(x+h)-f(x)|}{|(x+h)-x|} \leq K$$
+Conversely, suppose there is a constact $c$ and a function $g$ in $L_{m}^{\infty}[a,b]$ such that
+$$f(x) = c + \int_{a}^{x}g \ dm \quad \textrm{for all} \enspace x \in [a,b]$$ 
+Then for all $x,y \in [a,b]$ (without loss of generality take $x < y$):
+
+$$|f(y) - f(x)| = \left|\left(c + \displaystyle\int_{a}^{y}g \ dm\right) - \left(c + \displaystyle\int_{a}^{x}g \ dm\right)\right| = \left|\int_{x}^{y}g \ dm\right| \leq ||g||_{\infty}\cdot|y-x|$$
+
+Therefore $f$ is Lipschitz with constant $||g||_{\infty}$.
+}
+\end{homeworkSection}
+
+\begin{homeworkSection}{(b)}
+Find a function $f$ on $[0,1]$ that is absolutely continuous but is not Lipschitz and verify that it is absolutely continuous but not Lipschitz.\\
+
+\problemAnswer{
+Take $f(x) = \sqrt{x}$. Then since $f'(x) = \displaystyle\frac{1}{2\sqrt{x}}$ is unbounded on $[0,1]$, $f$ is not Lipschitz on $[0,1]$. And $f$ is absolutely continuous because we may write
+$$f(x) = \displaystyle\int_{0}^{x}\displaystyle\frac{dt}{2\sqrt{t}}$$
+where the integrand, $f'$ is Lebesgue-integrable (even though it's an improper integral).
+}
+
+\end{homeworkSection}
+
+\end{homeworkProblem}
+
+\clearpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+Let $f$ be an entire function satisfying
+$$|f(z)| \leq 1 + |\textrm{Im} \ z|.$$
+Prove or disprove: $f$ is constant.\\
+
+\problemAnswer{
+$f$ is entire so it has a Taylor series around $0$, say $f(z) = \sum_{n=0}^{\infty}a_{n}z^{n}$. By Cauchy's Integral formula, for any $R>0$, we have
+$$f^{(n)}(0) = \displaystyle\frac{n!}{2\pi i}\displaystyle\int_{z=Re^{i\theta}}\displaystyle\frac{f(z)}{z^{n+1}}\ dz = \displaystyle\frac{n!}{2\pi i}\displaystyle\int_{0}^{2\pi}\displaystyle\frac{f(Re^{i\theta})}{(Re^{i\theta})^{n+1}}Rie^{i\theta}\ d\theta$$
+Since $a_{n} = \displaystyle\frac{f^{(n)}}{n!}$, we have 
+\begin{align*}
+    |a_{n}| &\leq \displaystyle\frac{1}{2\pi}\displaystyle\int_{0}^{2\pi}\displaystyle\frac{1+|\Im(Re^{i\theta})|}{R^{n}}\ d\theta \\
+    &= \displaystyle\frac{1}{2\pi}\displaystyle\int_{0}^{2\pi}\displaystyle\frac{|1+ R\sin\theta|}{R^{n}}\ d\theta\\
+    &\leq \displaystyle\frac{1}{2\pi}\displaystyle\int_{0}^{2\pi}\displaystyle\frac{1+R}{R^{n}} \ d\theta \\
+    &= \displaystyle\frac{1+R}{R^{n}} \rightarrow 0
+\end{align*}
+for $n \geq 2$. Therefore $a_{n} = 0$ for $n\geq 2$, which implies $f(z) = az + b$ is linear. If $a\neq 0$, then for $z\in\mathbb{R}$ the reverse triangle inequality would give
+\begin{align*}
+    1 = 1 + |\Im(z)| &\geq |f(z)| \\
+    &= |az+b| \\
+    &\geq |az| - |b|
+\end{align*}
+Then choosing $z$ so that $|z| > \displaystyle\frac{|b| + 1}{|a|}$, this becomes
+$$1 \geq |az|-|b| > 1$$
+This contradiction shows that $a$ must be zero. That is, $f$ is constant.
+}
+
+\end{homeworkProblem}
+
+\clearpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 3
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+
+Let $m$ denote the Lebesgue measure on $[0,1]$, and let $\{f_{n}\}_{n\geq 1}$ be a sequence of Lebesgue measurable functions on $[0,1]$. Suppose that for each $x\in[0,1]$, $\sup\limits_{n}|f_{n}(x)| < \infty$. Show that for each $\epsilon > 0$, there is a measurable set $A_{\epsilon} \subset [0,1]$ and a real number $B_{\epsilon} > 0$ so that\\
+\indent (a) \ $m([0,1]\setminus A_{\epsilon}) < \epsilon$, \\
+\indent (b) \ $|f_{n}(x)| \leq B_{\epsilon}$ for all $x \in A_{\epsilon}$ and all $n \geq 1$.\\
+
+\problemAnswer{
+For $k\in\mathbb{N}$ define
+$$E_{k}:= \bigcup_{n=1}^{\infty}\{x : |f_{n}(x)| > k\},$$
+the set of all $x$ for which at least one of the $f_{n}$ has $|f_{n}(x)| > k$. Observe that $\{E_{k}\}_{k=1}^{\infty}$ is a descending sequence of measurable sets. Next define 
+$$E:=\displaystyle\bigcap_{k=1}^{\infty}E_{k} = \bigcap_{k=1}^{\infty}\bigcup_{n=1}^{\infty}\{x : |f_{n}(x)| > k\},$$ 
+the set of all $x$ for which $|f_{n}(x)| = \infty$ for some $n$. By hypothesis, for each $x \in [0,1]$, there is no $n$ with $|f_{n}(x)| = \infty$. In other words, $m(E) = 0$. Since $\{E_{k}\}_{k=1}^{\infty}$ is a decreasing sequence of measurable sets, by continuity of measure we have
+$$0 = m(E) = m\left(\bigcap_{k=1}^{\infty}E_{k}\right) = \lim_{k\to\infty}m(E_{k})$$
+Therefore for any $\epsilon > 0$, $\exists k_{\epsilon}$ such that $m(E_{k_{\epsilon}}) < \epsilon$. Define $A_{\epsilon} := E_{k_{\epsilon}}^{c}$. Then 
+$$m([0,1]\setminus A_{\epsilon}) = m(A_{\epsilon}^{c}) = m(E_{k_{\epsilon}}) < \epsilon$$
+so condition (a) is satisfied. To prove (b), choose $x\in A_{\epsilon} = E_{k_{\epsilon}}^{c}$. Since
+$$E_{k_{\epsilon}}^{c} = \left(\bigcup_{n=1}^{\infty}\{x : |f_{n}(x)| > k_{\epsilon}\}\right)^{c} = \bigcap_{n=1}^{\infty}\left(\{x : |f_{n}(x)| > k_{\epsilon}\}\right)^{c},$$
+we have for all $n$ that $|f_{n}(x)| \leq k_{\epsilon}$. Therefore (b) is satisfied.
+}
+
+\end{homeworkProblem}
+
+\clearpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 4
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+
+Let $D \subset \mathbb{C}$ denote the unit disc and let $S$ denote the strip $\{z \in \mathbb{C} : |\textrm{Im} \ z| < \frac{\pi}{2}\}$.\\
+
+\begin{homeworkSection}{(a)}
+Find a conformal map $f$ from $D$ onto $S$ satisfying $f(0) = 0$ and $f'(0) = 2$.\\
+
+\problemAnswer{
+The map $h: z \mapsto e^{z}$ takes $S$ into the right half plane $\{z : \textrm{Re} z > 0\}$, and the map $k: z \mapsto \displaystyle\frac{z-1}{z+1}$ takes the right half plane into $D$. Therefore their composition $k\circ h = \displaystyle\frac{e^{z} - 1}{e^{z} + 1}$ is a conformal map $S \rightarrow D$, so $(k\circ h)^{-1}$ is a conformal map from $D$ to $S$. Define 
+$$f = (k\circ h)^{-1} = h^{-1}\circ k^{-1} = \log\left(\frac{1+z}{1-z}\right)$$
+Then by the quotient and chain rules we have
+$$f'(z) = \frac{1-z}{1+z}\cdot\left(\frac{(1-z) + (1+z)}{(1-z)^{2}}\right)$$
+We now compute
+$$f(0) = \log 1 = 0$$
+$$f'(0) = \frac{1}{1}\cdot\frac{1+1}{1^{2}} = 2$$
+so $f$ satisfies the desired conditions.
+}
+\end{homeworkSection}
+
+\begin{homeworkSection}{(b)}
+Show that if $g: D \rightarrow S$ is analytic with $g(0) = 0$ then $|g'(0)| \leq 2$.\\
+
+\problemAnswer{
+Let $h(z), k(z)$ be as in part (a). Then $F:= k\circ h\circ g: D \rightarrow D$ is an analytic map of the unit disk. By the Schwarz Lemma, $|F'(0)| \leq 1$. By construction, $F$ is given by 
+$$F(z) = \frac{e^{g(z)} - 1}{e^{g(z)} + 1}$$
+so by the quotient rule and chain rule we have
+$$F'(z) = \frac{(e^{g(z)} + 1)\cdot e^{g(z)}\cdot g'(z) - (e^{g(z)} -1)\cdot g'(z)\cdot e^{g(z)}}{(e^{g(z)} + 1)^{2}} $$
+Using the fact that $g(0) = 0$ this simplifies to
+$$F'(z) = \frac{2g'(z)}{4} = \frac{g'(z)}{2}$$
+Finally, $|F'(0)| \leq 1$ gives
+$$|F'(0)| = \frac{|g'(0)|}{2} \leq 1 \Rightarrow |g'(0)| \leq 2$$
+}
+\end{homeworkSection}
+
+\end{homeworkProblem}
+
+\clearpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 5
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+Let $\{u_{n}\}_{n\geq 1}$ be a sequence of Lebesgue measurable functions on $[0,1]$ and assume $\lim_{n\to\infty}u_{n}(x) = 0$ a.e. on $[0,1]$, and also $||u_{n}||_{L^{2}[0,1]} \leq 1$ for all $n$. Prove $\lim_{n\to\infty}||u_{n}||_{L^{1}[0,1]} = 0$.\\
+
+\problemAnswer{ 
+For any measurable set $E \subset [0,1]$, define $g = \chi_{E} \in L^{2}[0,1]$. Then H\"{o}lder's inequality gives
+\begin{align*}
+    ||u_{n}||_{L^{1}(E)} &\leq ||u_{n}||_{L^{2}(E)}\cdot||g||_{L^{2}(E)} \\
+    &\leq 1\cdot\sqrt{m(E)} \\
+    &= \sqrt{m(E)}
+\end{align*}
+
+
+Let $\epsilon > 0$. $[0,1]$ has finite measure so by Egoroff's Theorem, there is a measurable set $A \subset [0,1]$ such that $u_{n} \rightrightarrows 0$ on $A$ and $m([0,1] \setminus A) < \displaystyle\frac{\epsilon^{2}}{4}$. By uniform convergence, there exists $N$ such that $n\geq N$ implies $|u_{n}(x)| < \displaystyle\frac{\epsilon}{2}$ for all $x \in A$. Then for $n \geq N$,
+
+\begin{align*}
+    ||u_{n}||_{1} &= \displaystyle\int_{A}|u_{n}| + \displaystyle\int_{[0,1]\setminus A}|u_{n}| \\
+    &< \displaystyle\frac{\epsilon}{2}m(A) + ||u_{n}||_{L^{1}([0,1]\setminus A)} \\
+    &\leq \displaystyle\frac{\epsilon}{2} + \sqrt{m([0,1]\setminus A)} \\
+    &< \displaystyle\frac{\epsilon}{2} + \displaystyle\frac{\epsilon}{2} \\
+    &= \epsilon
+\end{align*}
+
+Therefore $||u_{n}||_{1} \rightarrow 0$.
+
+}
+\end{homeworkProblem}
+
+\clearpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 6
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+Suppose $O$ is a region in $\mathbb{C}$ and $B$ is an open disc with $\bar{B} \subset O$.
+
+\begin{homeworkSection}{(a)}
+Assume that $f$ is a non-constant analytic function on $O$ with $|f|$ constant on $\partial B$. Prove that $f$ has a zero in $B$.\\
+
+\problemAnswer{
+Denote the constant by $M$, so $|f| = M$ on $\partial B$. By the maximum modulus principle, $|f| \leq M$ in $B$. If $f$ has no zeroes in $B$, then $\frac{1}{f}$ is also analytic on $O$, and $|\frac{1}{f}| \equiv \frac{1}{M}$ on $\partial B$. Applying MMP again gives $|\frac{1}{f}| \leq \frac{1}{M}$ in $B$, which implies $|f| \geq M$ in $B$. Since $\bar{B}$ is compact, $f$ attains its max. and min. values on $\bar{B}$. Therefore $|f|$ is constant and equal to $M$ on all of $\bar{B}$. By the open mapping theorem, either $f$ is constant on $B$ or $f(B)$ must be an open set. But since $|f|$ is constant on $B$, $f(B) \subset \{|z| = M\}$ cannot be open, so $f$ is constant on $B$. Since it is analytic on $O$, it must also be constant on $O$. This contradiction proves $f$ must have a zero in $B$.
+}
+\end{homeworkSection}
+
+\begin{homeworkSection}{(b)}
+Prove that if $g$ is analytic in $O$ and Re($g$) is constant on $\partial B$, then $g$ is constant.\\
+
+\problemAnswer{
+Since $g$ is analytic, so is $f(z) = e^{g(z)}$. Note that $|f(z)| = |e^{g(z)}| = e^{\textrm{Re}(g)}$. Thus $|f|$ is constant on $\partial B$. Since $f \neq 0$ on $O$, we can conclude by part (a) that $f$ is constant in $O$, which implies $g$ is constant. 
+}
+\end{homeworkSection}
+
+\end{homeworkProblem}
+
+\end{document}
