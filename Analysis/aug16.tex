@@ -1,0 +1,246 @@
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage{graphicx} % Required to insert images
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{systeme}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{mathtools}
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in 
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+\chead{\hmwkClass\: } % Top center header
+\rhead{\hmwkTitle} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+   
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Analysis - August, 2016} % Assignment title
+\newcommand{\hmwkDueDate}{Monday,\ January\ 1,\ 2012} % Due date
+\newcommand{\hmwkClass}{UMD Math Qualifying Exam Solutions} % Course/class
+\newcommand{\hmwkAuthorName}{Phil Wertheimer} % Your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+Let $m$ be the Lebesgue measure on $\mathbb{R}$, and $m^{*}$ denotes the Lebesgue outer measure. Prove that $B \subset \mathbb{R}$ is not Lebesgue measurable if and only if there exists $\epsilon > 0$ such that for every Lebesgue measurable $A \subset B$, $m^{*}(B\setminus A) \geq \epsilon$.
+
+\problemAnswer{
+This follows immediately from the following lemma: a set $E$ is measurable iff for all $\epsilon > 0$, there exists a closed set $F \subset E$ such that $m^{*}(E\setminus F) < \epsilon$. This is a standard theorem which characterizes measurable sets, and is often given as the definition; you can also look at my solution for the August 2015 exam \#3 for a proof. \newline
+
+Now, if $B$ is measurable then for all $\epsilon > 0$ there exists $F\subset B$, $F$ closed (hence measurable) with $m^{*}(B\setminus F) < \epsilon$. This proves the reverse direction by contrapositive. Similarly, for the other direction, we take contrapositive. 
+Suppose that for all $\epsilon > 0$, there exists a measurable set $A \subset B$ with $m^{*}(B\setminus A) < \epsilon$. Let $\epsilon > 0$ be arbitrary and choose $A \subset B$ with $m^{*}(B\setminus A) < \displaystyle\frac{\epsilon}{2}$. Since $A$ is measurable, the lemma implies that there exists $F$ closed, $F\subset A$ and $m^{*}(A\setminus F) < \displaystyle\frac{\epsilon}{2}$. Therefore $F\subset A$ and $m^{*}(B\setminus A) < \epsilon$, so the lemma implies that $B$ is measurable. 
+}
+
+%--------------------------------------------
+
+\end{homeworkProblem}
+
+\clearpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+Let $\Omega \subset \mathbb{C}$ be a domain and $\{z_{1}, \hdots, z_{2n}\}$ and even number of points in the same connected component of $\mathbb{C} - \bar{\Omega}$. Show that there exists a holomorphic function $f(z)$ on $\Omega$ such that 
+$$f^{2}(z) = (z-z_{1})\cdots(z-z_{2n})$$
+
+%--------------------------------------------
+
+\problemAnswer{
+:o
+}
+
+%--------------------------------------------
+
+\end{homeworkProblem}
+
+\clearpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 3
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+Assume that $f$ is a monotone increasing function on $[0,1]$. Prove that the following two statements are equivalent. \newline
+\indent (a)$f$ is absolutely continuous.\newline
+\indent (b) For every absolutely continuous function $g$ on $[0,1]$ and for every $x\in[0,1]$,
+$$\displaystyle\int_{0}^{x}f(t)g'(t)\ dt + \displaystyle\int_{0}^{x}f'(t)g(t)\ dt = f(x)g(x) - f(0)g(0)$$
+
+%--------------------------------------------
+
+\problemAnswer{
+First suppose $f$ is absolutely continuous. Then since $g$ is absolutely continuous, so is $fg$. Indeed, both are continuous on $[0,1]$ and so attain max. values, say $|f(x)| \leq M_{f}, |g(x)| \leq M_{g}$ on $[0,1]$. Let $\epsilon > 0$ and take $\{a_{k},b_{k}\}_{k=1}^{N} \subset [0,1]$ pairwise disjoint with $\displaystyle\sum_{k=1}^{N}(b_{k}-a_{k}) < \min\{ \delta_{f}, \delta_{g}\}$, where $\delta_{f}$ corresponds to the $\displaystyle\frac{\epsilon}{2M_{g}}$-challenge for absolute continuity of $f$, and $\delta_{g}$ corresponds to the $\displaystyle\frac{\epsilon}{2M_{f}}$-challenge for absolute continuity of $g$. Then
+\begin{align*}
+    \displaystyle\sum_{k=1}^{N}|f(b_{k})g(b_{k}) - f(a_{k})g(b_{k})| &= \displaystyle\sum_{k=1}^{N}|f(b_{k})g(b_{k}) - f(b_{k})g(a_{k}) + f(b_{k})g(a_{k}) - f(a_{k})g(a_{k})| \\
+    &\leq \displaystyle\sum_{k=1}^{N}|f(b_{k})[g(b_{k}) - g(a_{k})]| + \displaystyle\sum_{k=1}^{N}|g(a_{k})[f(b_{k})- f(a_{k})]| \\
+    &\leq M_{f}\displaystyle\sum_{k=1}^{N}|g(b_{k}) - g(a_{k})| + M_{g}\displaystyle\sum_{k=1}^{N}|f(b_{k}) - f(a_{k})| \\
+    &< \epsilon
+\end{align*}
+Since $fg$ is absolutely continuous, $(fg)'$ exists a.e. and $(fg)(x) = (fg)(0) + \displaystyle\int_{0}^{x}(fg)'(t)\ dt$. Expanding gives
+$$f(x)g(x) = f(0)g(0) + \displaystyle\int_{0}^{x}f'(t)g(t)\ dt + \displaystyle\int_{0}^{x}g'(t)f(t)\ dt$$
+as desired. Therefore $(a) \Rightarrow (b)$. For the other direction, suppose $(b)$ holds. The function $g(x) \equiv 1$ is absolutely continuous on $[0,1]$ so $(b)$ implies
+$$\displaystyle\int_{0}^{x}f(t)g'(t)\ dt + \displaystyle\int_{0}^{x}f'(t)g(t)\ dt = f(x)g(x) - f(0)g(0) \Rightarrow \displaystyle\int_{0}^{x}f'(t)\ dt =f(x) - f(0)$$
+Since $f$ is monotone increasing on $[0,1]$, it's of bounded variation (its variation is simply $f(1) - f(0)$. Therefore $f'$ exists a.e. and we have $\displaystyle\int_{0}^{1}f'(t)\ dt \leq f(1) - f(0)$. In other words, $f' \in L^{1}[0,1]$. Since $f$ is the integral of an $L^{1}$ function, it's absolutely continuous.
+}
+
+%--------------------------------------------
+
+\end{homeworkProblem}
+
+\clearpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 4
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+Let $f(z)$ be a holomorphic function on the disk $|z| < R$. Suppose that $|f(z)| \leq M$ for all $|z| < R$, and that
+$$f(0) = f'(0) = \hdots = f^{(n)}(0) = 0$$
+for some integer $n \geq 0$. Show that 
+$$|f(z)| \leq M\left(\displaystyle\frac{|z|}{R}\right)^{n+1}$$
+for all $|z|< R$. Moreover, if equality holds for some point, then
+$$f(z) = \alpha\cdot M\left(\displaystyle\frac{z}{R}\right)^{n+1}$$
+for some complex number $\alpha$ with $|\alpha| = 1$ and all $|z| < R$.\\
+
+\problemAnswer{ 
+This is a generalization of the Schwarz Lemma; the proof will be very similar. Since $f(z)$ is holomorphic with a zero of order ($n+1$) at $0$, we can write $f(z)=z^{n+1}g(z)$ where $g$ is holomorphic and $g(0)\neq0$. Note also that $f(z)$ has a power series expansion $f(z) = \sum_{n=1}^{\infty}a_{k}z^{k} = \sum_{k=n+1}^{\infty}a_{k}z^{k}$. \newline
+
+Define $h(z) = $ \[ \begin{cases} 
+      \displaystyle\frac{f(z)}{z^{n+1}} & z \neq 0 \\
+      \displaystyle\frac{f^{(n+1)}(0)}{n!} & z = 0 \\
+   \end{cases}
+\]
+
+Observe that $h(z)$ is analytic in $D_{R} = \{|z| < R\}$. Let $0 < r < R$. Then the Maximum Modulus Principle implies that $|h(z)| = \left|\displaystyle\frac{f(z)}{z^{n+1}}\right| \leq \displaystyle\frac{M}{r^{n+1}}$ on $D_{R}$. Letting $r \to R$ gives the result.\newline
+
+If equality holds for some $0\neq z_{0} \in D_{R}$, then $|h(z)| = \left|\displaystyle\frac{f(z)}{z^{n+1}}\right| = \displaystyle\frac{M}{R^{n+1}}$ and MMP implies that $|h|$ is constant on the interior i.e. $\left|\displaystyle\frac{f(z)}{z^{n+1}}\right| = \alpha$ for some $\alpha \in \mathbb{C}$, $|\alpha| = \displaystyle\frac{M}{R^{n+1}}$. Alternatively, apply the Schwarz Lemma above to $\displaystyle\frac{f(Rz)}{M} : D \rightarrow D$.
+
+}
+
+\end{homeworkProblem}
+
+\clearpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 5
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+Let $m$ be the Lebesgue measure on $\mathbb{R}$ and consider a sequence $\{f_{n}\}_{n\geq 1}$ of nonnegative Lebesgue measurable functions on $\mathbb{R}$. Suppose there exist $M > 0$ and positive convergent series $\sum_{n\geq 1}\alpha_{n} < \infty$ and $\sum_{n\geq 1}\beta_{n} < \infty$ such that
+$$\displaystyle\int_{f_{n}\leq M}f_{n}\ dm \leq \alpha_{n}, \textrm{ and } m(\{f_{n} > M\}) \leq \beta_{n} \ \forall n\geq 1$$
+Prove that $\sum_{n\geq 1}f_{n}(x) < \infty$ a.e.
+
+\problemAnswer{ 
+
+}
+\end{homeworkProblem}
+
+\clearpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 6
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+Evaluate the integral: $\displaystyle\int_{-\infty}^{\infty}\frac{\cos x}{(x^2+1)} dx$ \newline
+
+\problemAnswer{ 
+We seek $\displaystyle\int_{-\infty}^{\infty}\Re(f(z))\ dz$ where $f(z) = \displaystyle\frac{e^{iz}}{z^{2}+1}$. For $R > 0$ consider the semicircular contour $\gamma_{R} = [-R,R] \cup C_{R}$, where $C_{R}$ is the arc $\{Re^{it}: t\in [0,\pi]\}$. Then when $R > 1$, $f$ is holomorphic in $\gamma_{R}$ except for a simple pole at $z=i$. Therefore the residue theorem gives 
+$$\displaystyle\int_{\gamma_{R}}f(z)\ dz = 2\pi i\textrm{Res}(i) = 2\pi i\lim_{z\to i}\displaystyle\frac{e^{iz}}{z+i} = 2\pi i\left(\displaystyle\frac{e^{-1}}{2i}\right) = \displaystyle\frac{\pi}{e}$$
+
+Along $C_{R}$, we have $z = Re^{i\theta}$ with $\theta\in [0,\pi]$ and so
+\begin{align*}
+    \left|\displaystyle\int_{C_{R}}f(z)\ dz\right| \leq \displaystyle\int_{C_{R}}|f(z)|\ dz &= \displaystyle\int_{0}^{\pi}\left|\displaystyle\frac{e^{iRe^{i\theta}}}{(Re^{i\theta})^{2}+1}\right| \ d\theta \\
+    &= \displaystyle\int_{0}^{\pi}\displaystyle\frac{e^{-R\sin\theta}}{|R^{2}e^{2i\theta}+1|}\ \ d\theta \\
+    &\leq \displaystyle\int_{0}^{\pi}\displaystyle\frac{1}{R^{2}-1}\ d\theta \\
+    &= \displaystyle\frac{\pi}{R^{2}-1} \rightarrow 0
+\end{align*}
+
+The last inequality follows since $R\sin\theta > 0$, combined with the reverse triangle inequality for the denominator. Putting this all together,
+$$\displaystyle\frac{\pi}{e} = \displaystyle\int_{\gamma_{R}}f(z)\ dz = \displaystyle\int_{-R}^{R}f(z)\ dz + \displaystyle\int_{C_{R}}f(z)\ dz$$
+and letting $R\to\infty$ we have
+$$\displaystyle\frac{\pi}{e} = \displaystyle\int_{-\infty}^{\infty}f(z)\ dz$$
+Finally, 
+$$\displaystyle\int_{-\infty}^{\infty}\displaystyle\frac{\cos x}{x^{2}+1}\ dx = \displaystyle\int_{-\infty}^{\infty}\Re(f(z))\ dz = \Re\left(\displaystyle\int_{\infty}^{\infty}f(z)\ dz\right) = \Re\left(\displaystyle\frac{\pi}{e}\right) = \displaystyle\frac{\pi}{e}$$
+
+}
+\end{homeworkProblem}
+
+\end{document}
