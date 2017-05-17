@@ -2,3 +2,6 @@
 *.log
 *.gz
 .DS_Store
+Analysis/*.pdf
+Algebra/*.pdf
+Probability/*.pdf
