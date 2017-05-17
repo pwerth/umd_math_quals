@@ -1,2 +1,2 @@
-# umd_math_analysis_quals
-TeX'ed solutions for the UMD Mathematics Qualifying Exams in Analysis
+# UMD Math Qualifying Exam Solutions
+TeX'ed solutions for the UMD Mathematics Qualifying Exams
