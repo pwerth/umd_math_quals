@@ -1,0 +1,324 @@
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage{graphicx} % Required to insert images
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{systeme}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{mathtools}
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in 
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+\chead{\hmwkClass\: } % Top center header
+\rhead{\hmwkTitle} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+   
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Analysis - January, 2016} % Assignment title
+\newcommand{\hmwkDueDate}{Monday,\ January\ 1,\ 2012} % Due date
+\newcommand{\hmwkClass}{UMD Math Qualifying Exam Solutions} % Course/class
+\newcommand{\hmwkAuthorName}{Phil Wertheimer} % Your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+Let $m$ be the Lebesgue measure on $\mathbb{R}$. For $A \subset \mathbb{R}$ define
+$$m_{*}(A) = \sup\{m(F) : F \subset A, \ F \textrm{ closed}\}$$
+
+\begin{homeworkSection}{(a)}
+Prove that $m_{*}(A) \leq m^{*}(A)$ for each $A \subset \mathbb{R}$ where $m^{*}$ denotes the Lebesgue outer measure. Conclude that if $A$ is Lebesgue measurable then $m^{*}(A) = m_{*}(A)$.\newline
+
+\problemAnswer{
+By monotonicity of outer measure, and since closed sets are measurable,
+\begin{align*}
+    m_{*}(A) &= \sup\{m(F) : F \subset A, \ F \ \textrm{closed}\} \\
+    &= \sup\{m^{*}(F) : F \subset A, \ F \ \textrm{closed}\} \\
+    &\leq m^{*}(A)
+\end{align*}
+
+Suppose $A$ is measurable. We first deal with the finite measure case $m(A) < \infty$. By the characterization of measurable sets, there exists a closed set $K \subset A$ with $m(A \setminus K) \leq \epsilon$. Since $m(A) < \infty$ we can use the excision property: $m(A) - m(K) \leq \epsilon$. This implies
+$$m^{*}(A) \geq m_{*}(A) \geq m(K) \geq m(A) - \epsilon = m^{*}(A) - \epsilon$$
+Since $\epsilon$ is arbitrary, we have $m_{*}(A) \geq m^{*}(A)$, hence equality. For the infinite measure case, 
+$$\infty = m(A) = \lim_{n\to\infty}m(A\cap[-n,n]) = \lim_{n\to\infty}m^{*}(A\cap[-n,n]) = \lim_{n\to\infty}m_{*}(A\cap[-n,n]) \leq \lim_{n\to\infty}m_{*}(A) = m_{*}(A)$$
+where the fourth equality follows from the finite measure case.
+}
+\end{homeworkSection}
+
+%--------------------------------------------
+
+\begin{homeworkSection}{(b)}
+Let $A \subset \mathbb{R}$ be such that $m^{*}(A) < \infty$. Prove that if $m_{*}(A) = m^{*}(A)$, then $A$ is Lebesgue measurable. Show by a counterexample that the condition $m^{*}(A) < \infty$ is necessary.\newline
+
+\problemAnswer{
+ 
+ Let $m^{*}(A) = m_{*}(A) < \infty$. Let $\epsilon > 0$. By definition of $m_{*}$, there exists a closed set $F \subset A$ with $m(F) > m_{*}(A) - \frac{\epsilon}{2}$. And by definition of $m^{*}$ there exists an open set $O \supset A$ with $m(O) < m^{*}(A) + \frac{\epsilon}{2}$. Since $F$ and $O$ are measurable sets of finite measure, we can apply monotonicty of outer measure and the excision property to conclude that
+\begin{align*}
+    m^{*}(O - A) \leq m^{*}(O - F) &= m*(O) - m^{*}(F) \\
+    &< m^{*}(A) + \frac{\epsilon}{2} - m^{*}(F)\\
+    &< m^{*}(A) + \frac{\epsilon}{2} - (m_{*}(A) - \frac{\epsilon}{2})\\
+    &= \epsilon
+\end{align*}
+Since we have found a measurable open set $O \supset A$ with $m^{*}(O - A) < \epsilon$ for arbitrary $\epsilon$, the characterization of measurable sets implies that $A$ is measurable. The assumption of finite outer measure is nececssary. As a counterexample, let $N \subset [0,1]$ be nonmeasurable and take $A = N \cup [2, \infty)$. Then $A$ is clearly nonmeasurable, but $m^{*}(A) = m_{*}(A) = \infty$. Indeed, $A$ contains the closed set $[2, N]$ for $N$ arbitrary large, so that $m_{*}(A) \geq N - 2$ for all $N > 2$, so $m_{*}(A) = \infty$. And since the outer measure of an interval is its length we have $m^{*}(A) \geq m^{*}([2, N]) = N - 2$ for all $N > 2$ which implies $m^{*}(A) = \infty$. 
+}
+\end{homeworkSection}
+
+%--------------------------------------------
+
+\end{homeworkProblem}
+
+\clearpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+Let $f(z)$ be a continuous function on the unit disk $D := \{z \in \mathbb{C} : |z| \leq 1\}$ which is holomorphic for $|z| < 1$, and such that $|f(z)| = 1$ for all $|z| = 1$.
+
+%--------------------------------------------
+
+\begin{homeworkSection}{(a)}
+Show that if $f$ has no zero in $D$, then $f$ must be constant.\newline
+
+\problemAnswer{
+By the Maximum Modulus Principle, $|f|$ is maximized on the boundary $\{|z| = 1\}$. If $f \neq 0$ in $D$, then the function $\displaystyle\frac{1}{f}$ is holomorphic in $D$. Applying the Maximum Modulus Principle again, $\left|\displaystyle\frac{1}{f}\right|$ must also achieve its maximum on $\{|z| = 1\}$. Equivalently, $|f|$ must attain its minimum on $\{|z| = 1\}$. Combining these two observations, we see that $|f|$ must be constant on $D$.\\
+        
+Now, since $f$ is holomorphic in $D$, the Open Mapping Theorem implies that $f$ is either constant or its image is an open set. But since $|f|$ is constant, the image of $f$ must lie inside the circle of radius $|f|$, so it cannot be open in $\mathbb{C}$. Therefore $f$ is constant.
+}
+\end{homeworkSection}
+
+%--------------------------------------------
+
+\begin{homeworkSection}{(b)}
+ Characterize all such $f$ with exactly one zero (with multiplicity) in $D$.
+
+\problemAnswer{
+Let $f$ be as above, and suppose $f$ has exactly one zero in $w \in D$. Write $f(z) = (z-w)g(z)$ where $g$ is holomorphic and $g(w) \neq 0$.\newline
+        
+If $w = 0$ then $f(z) = zg(z) \Rightarrow |f(z)| = |z|\cdot|g(z)|$ so on the boundary $|z| = 1$ we have $|g(z)| = |f(z)|$ is constant of modulus one by part (a). Then $f(z) = cz$ for some $c \in \mathbb{C}$, $|c| = 1$, so $f$ is a rotation. Consider the transformation $T(z) = \displaystyle\frac{w-z}{1-\bar{w}z}$. We have $f(T(0)) = f(w) = 0$. Furthermore $T$ preserves the boundary $\partial D$ so that $|f\circ T| = 1$ on $\partial D$. Therefore the above argument gives $f\circ T(z) = cz \Rightarrow f(z) = f\circ T\circ T(z) = cT(z)$. Note we used the fact that $T\circ T$ is the identity map.
+}
+\end{homeworkSection}
+
+%--------------------------------------------
+
+\end{homeworkProblem}
+
+\clearpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 3
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+Let $f: [a,b] \rightarrow \mathbb{R}$ be a function of bounded variation. Suppose $V: [a,b] \rightarrow [0, \infty)$ is the function that assigns to each $x \in [a,b]$ the total variation $V(x)$ of $f$ over $[a,x]$. The variation $f$ over a subinterval $[c,d]$ will be denoted by $V_{c}^{d}f$.
+
+%--------------------------------------------
+
+\begin{homeworkSection}{(a)}
+Prove that $|f'| \leq V'$ a.e. on $[a,b]$, and from this deduce that
+$$\displaystyle\int_{a}^{b}|f'| \leq V_{a}^{b}f$$
+
+\problemAnswer{
+First note that $f$, being a function of bounded variation, is differentiable a.e. on $[a,b]$. The same is true of $V$ because it is increasing. Now, simply use the definition of derivative to obtain
+\begin{align*}
+    |f'| = \left|\lim_{h\to 0}\displaystyle\frac{f(x+h)-f(x)}{h}\right| &= \lim_{h\to 0}\left|\displaystyle\frac{f(x+h)-f(x)}{h}\right| \\
+    &\leq \lim_{h\to 0}\left|\displaystyle\frac{V_{x}^{x+h}f}{h}\right| \\
+    &= \lim_{h\to 0}\displaystyle\frac{V(x+h)-V(x)}{h} = V'(x)
+\end{align*}
+Therefore $\displaystyle\int_{a}^{b}|f'| \leq \displaystyle\int_{a}^{b}V' \leq V(b) - V(a) = V_{a}^{b}f$, where the second inequality follows from the monotonicity of $V$.
+}
+\end{homeworkSection}
+
+%--------------------------------------------
+
+\begin{homeworkSection}{(b)}
+Use part a to prove that if $\int_{a}^{b}|f'| = V_{a}^{b}f$ and if $[c,d] \subset [a,b]$ then 
+$$\displaystyle\int_{c}^{d}|f'| = V_{c}^{d}f$$
+
+\problemAnswer{
+The inequality $\int_{c}^{d}|f'| \leq V_{c}^{d}f$ follows immediately from part a applied to the subinterval $[c,d]$. For the reverse inequality, we apply part a to the subintervals $[a,c]$ and $[d,b]$ to obtain
+$$\displaystyle\int_{c}^{d}|f'| = \displaystyle\int_{a}^{b}|f'| - \left(\displaystyle\int_{a}^{c}|f'| + \displaystyle\int_{d}^{b}|f'|\right) = V_{a}^{b}f - \left(\displaystyle\int_{a}^{c}|f'| + \displaystyle\int_{d}^{b}|f'|\right) \geq V_{a}^{b}f - (V_{a}^{c}f + V_{d}^{b}f) = V_{c}^{d}f$$
+}
+\end{homeworkSection}
+
+%--------------------------------------------
+
+\begin{homeworkSection}{(c)}
+Use part b to prove that if $\int_{a}^{b}|f'| = V_{a}^{b}f$ then $f$ is absolutely continuous
+
+\problemAnswer{ % Answer
+If $\int_{a}^{b}|f'| = V_{a}^{b}f$ then $V$ is absolutely continuous, being the integral of an $L^{1}$ function. So let $\epsilon > 0$ and let $\{(a_{k},b_{k})\}_{k=1}^{N}$ be disjoint in $[a,b]$ with $\sum_{k=1}^{N}(b_{k}-a_{k}) < \delta$, where $\delta$ answers the $\epsilon$-challenge for the absolute continuity of $V$. Then
+$$\displaystyle\sum_{k=1}^{N}|f(b_{k})-f(a_{k})| < \sum_{k=1}^{N}V_{a_{k}}^{b_{k}}f = \sum_{k=1}^{N}V(b_{k}) - V(a_{k}) < \epsilon$$
+}
+\end{homeworkSection}
+
+%--------------------------------------------
+
+\end{homeworkProblem}
+
+\clearpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 4
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+Show that the series
+$$f(z) = \sum_{n=0}^{\infty}\frac{(-1)^{n}}{z+n} $$
+defines a meromorphic function $f(z)$ on the whole complex plane $\mathbb{C}$. Find the poles of $f(z)$.\\
+
+\problemAnswer{ 
+It suffices to show that $f(z)$ is meromorphic in every compact set $K \subset \mathbb{C}$. Choose $R$ so that $K$ is contained in the closed disk of radius $R, D_{R}$. Write 
+$$f(z) = \displaystyle\sum_{n=0}^{\infty}\displaystyle\frac{(-1)^{2n}}{z+2n} + \displaystyle\sum_{n=0}^{\infty}\displaystyle\frac{(-1)^{2n+1}}{z+2n+1} = \displaystyle\sum_{n=0}^{\infty}\displaystyle\frac{1}{(z+2n)(z+2n+1)}$$
+
+Now pick $N > R$ and split $f(z)$ into
+$$\displaystyle\sum_{n=0}^{N}\displaystyle\frac{1}{(z+2n)(z+2n+1)} + \displaystyle\sum_{n=N+1}^{\infty}\displaystyle\frac{1}{(z+2n)(z+2n+1)}$$
+
+The first sum gives a meromorphic function in $D_{R}$ because there are only finitely many terms. I claim the second sum is an analytic function in $D_{R}$. Indeed, the reverse triangle inequality gives $|z+2n| \geq 2n - |z| \geq 2n - R$ and similarly $|z+2n+1| \geq 2n + 1 - |z| \geq 2n - R$, which implies
+$$\left|\displaystyle\frac{1}{(z+2n)(z+2n+1)}\right| \leq \displaystyle\frac{1}{(2n-R)^{2}}$$
+Again using the reverse triangle inequality, 
+$$|2n-R| \geq |2n| - R = 2n - R > n - R > n$$
+Putting this all together gives
+$$\displaystyle\sum_{n=N+1}^{\infty}\displaystyle\frac{1}{(z+2n)(z+2n+1)} < \displaystyle\sum_{n=N+1}^{\infty}\displaystyle\frac{1}{n^{2}} < \infty$$
+Therefore the second sum converges. Since $f(z)$ is the sum of a meromorphic and analytic function in $K$, it is meromorphic in $K$. This holds for all compact $K$ so $f$ defines a meromorphic function on $\mathbb{C}$. Clearly, its poles are at the negative integers.
+}
+
+\end{homeworkProblem}
+
+\clearpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 5
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+In this problem, you may assume the Parallelogram Law: for each $f, g \in L^{2}(\mathbb{R})$,
+$$\|f + g\|_{2}^{2} + \|f - g\|_{2}^{2} = 2(\|f\|_{2}^{2} + \|g\|_{2}^{2})$$
+Let $V$ be a closed subset of $L^{2}(\mathbb{R}$). Suppose that for each $f, g \in V$, $\lambda f + (1 - \lambda)g \in V$ whenever $\lambda \in [0,1]$. Prove that for each $f \in L^{2}(\mathbb{R}$) there exists a unique $g \in V$ such that 
+$$\|f - g\|_{2} \leq \|f - h\|_{2} \quad \forall h \in V$$
+
+\problemAnswer{ 
+Let $f \in L^{2}(\mathbb{R})$. Let $\delta = \inf \{||f-g||_{2} : g \in V\}$. By definition of infimum, for all $n\geq 1$ there exists $g_{n} \in V$ with $||f-g_{n}||_{2} < \delta + \frac{1}{n}$. I claim that the sequence $\{g_{n}\}_{n\geq 1}$ is Cauchy. Indeed, let $\epsilon > 0$ and choose $N > \frac{4+8\delta}{\epsilon}$. Then $\forall m,n \geq N$,
+\begin{align*}
+    ||g_{m}-g_{n}||_{2}^{2} = ||(g_{m} - f) + (f - g_{n})||_{2}^{2} &= 2(||g_{m} - f||_{2}^{2} + ||f - g_{m}||_{2}^{2}) - ||g_{m}+g_{n} -2f||_{2}^{2}\\
+    &< 2\left(\delta+\frac{1}{m}\right)^{2} + 2\left(\delta+\frac{1}{n}\right)^{2} - 4\left|\left|\displaystyle\frac{g_{m} + g_{n}}{2} -f\right|\right|_{2}^{2}\\
+    &< 2\left(\delta^{2} + \frac{2\delta}{m} + \frac{1}{m^{2}}\right) + 2\left(\delta^{2} + \frac{2\delta}{n} + \frac{1}{n^{2}}\right) - 4\delta^{2}\\
+    &= \frac{4\delta}{m} + \frac{2}{m^{2}} + \frac{4\delta}{n} + \frac{2}{n^{2}}\\
+    &\leq \frac{4\delta}{N} + \frac{2}{N^{2}} + \frac{4\delta}{N} + \frac{2}{N^{2}} = \frac{8\delta}{N} + \frac{4}{N^{2}} < \frac{8\delta + 4}{N} < \epsilon
+\end{align*}
+Therefore $\{g_{n}\}$ is a Cauchy sequence in $V \subset L^{2}(\mathbb{R})$. By completeness of $L^{2}$, this sequence converges; call the limit $g$. Since $V$ is closed, $g \in V$. Note $||g||_{2}$ = $\lim_{n\to\infty}||g_{n}||$ = $\delta$ as desired.\newline
+
+For uniqueness, if there were two such functions, say $g$ and $h$ with $||f-g||_{2} = ||f-h||_{2} = \delta$, then by similar logic as above we have
+\begin{align*}
+    ||g-h||_{2}^{2} = ||(g-f)+(f-h)||_{2}^{2} &= 2(||g-f||_{2}^{2}) + 2(||f-h||_{2}^{2}) - ||g+h-2f||_{2}^{2} \\
+    &= 4\delta^{2} - 4\left|\left|\displaystyle\frac{g+h}{2} - f\right|\right| \\
+    &< 4\delta^{2} - 4\delta^{2} = 0
+\end{align*}
+Therefore $||g-h||_{2}^{2} = 0$ so $g=h$.
+}
+\end{homeworkProblem}
+
+\clearpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 6
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}
+Evaluate the integral: $\displaystyle\int_{0}^{\infty}\frac{x\sin x}{(x^2+1)(x^2+4)} dx$ \newline
+
+\problemAnswer{ 
+Denote the integral by $I$. Since the integrand is even, we have $I = \displaystyle\frac{1}{2}\int_{-\infty}^{\infty}\frac{x\sin x}{(x^2+1)(x^2+4)} dx$.\\
+Define $f(z) = \displaystyle\frac{ze^{iz}}{(z^2+1)(z^2+4)}$; then $I = \displaystyle\frac{1}{2}\int_{-\infty}^{\infty}\Im(f(z))dz$.\\
+
+For each $R > 0$, we consider a semicircular contour $\gamma_{R} = [-R, R] \cup C_{R}$, where $C_{R}$ is the arc $\{Re^{it} : t \in [0, \pi]\}$. Then when $R > 2$, $f$ is holomorphic in $\gamma_{R}$ except at $z = i, 2i$, so we may apply the Residue Theorem. We compute the residues:\\
+$$Res(f;i) = \lim_{z\to i}(z-i)f(z) = \lim_{z\to i}\frac{ze^{iz}}{(z+i)(z^2+4)} = \frac{ie^{-1}}{(2i)(3)} = \frac{1}{6e}$$
+$$Res(f;2i) = \lim_{z\to 2i}(z-2i)f(z) = \lim_{z\to 2i}\frac{ze^{iz}}{(z^2+1)(z+2i)} = \frac{2ie^{-2}}{(-3)(4i)} = \frac{-1}{6e^{2}}$$
+Thus for $R > 2$, 
+$$\displaystyle\int_{\gamma_{R}}f(z)dz = 2\pi i\left(\frac{1}{6e} - \frac{1}{6e^{2}}\right) = \frac{\pi i (e-1)}{3e^{2}}$$
+Now, 
+$$\displaystyle\int_{\gamma_{R}}f(z)dz = \displaystyle\int_{-R}^{R}f(z)dz + \displaystyle\int_{C_{R}}f(z)dz$$
+Letting $R\to 0$, Jordan's lemma gives $\displaystyle\int_{C_{R}}f(z)dz \to 0$, so that
+$$\displaystyle\frac{\pi i (e-1)}{3e^{2}} = \displaystyle\int_{-\infty}^{\infty}f(z)dz$$
+Finally, we have 
+$$I = \frac{1}{2}\int_{-\infty}^{\infty}\Im(f(z))dz = \frac{1}{2}\Im\left(\frac{\pi i(e - 1)}{3e^{2}}\right) = \frac{\pi(e-1)}{6e^{2}}$$
+}
+\end{homeworkProblem}
+
+\end{document}
